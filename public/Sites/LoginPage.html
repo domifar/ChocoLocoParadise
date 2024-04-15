@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - ChocoLocoParadise</title>
+  <link rel="stylesheet" href="../Styles/loginPageStyles.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+  <link rel="icon" type="image/png" href="../assets/Logo.png">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
+</head>
+<body>
+  <a href="../index.html"><img class="backPicture" src="../assets/Logo.png" alt="Logo"></a>
+  <div class="wrapper">
+    <form action="">
+      <h1>Anmelden</h1>
+      <div class="input-box">
+        <input id="nameInputLogIn" type="text" placeholder="Benutzername" required>
+        <i class='bx bxs-user'></i>
+      </div>
+      <div class="input-box">
+        <input id="passwordInputLogIn" type="password" placeholder="Passwort" required>
+        <i class='bx bxs-lock-alt' ></i>
+      </div>
+      
+      <button type="submit" onclick="knownUser(event)" class="btn">Anmelden</button>
+      <div id="loginMessage"></div>
+      <div class="register-link">
+        <p>Das erste Mal bei ChocoLoco Paradise?<a href="RegisterPage.html">Registrieren</a></p>
+      </div>
+    </form>
+  </div>
+
+  <script src="../Logic/LoginPage.js"></script>
+</body>
+</html>

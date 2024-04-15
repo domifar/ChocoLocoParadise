@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../assets/Logo.png">
+    <title>Rewards - ChocoLocoParadise</title>
+    <link rel="stylesheet" href="../Styles/rewardStyles.css">
+    <link rel="stylesheet" href="../Defaults/Default.css">
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+    <header>
+        <nav class="menu">
+            <div class="left">
+                <input type="checkbox" id="nav-check">
+                <label id="iconmenu" for="nav-check">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </label>
+                <div class="nav-links">
+                    <a class="smallLogo" href="../index.html"><img src="../assets/LogoSmall.png" alt="Logo" style="height: 7vh;"></a>
+                    <a href="./Games.html" class="games">
+                        <i class="controllerIcon fa fa-gamepad"></i>
+                        Casino
+                    </a>
+                    <a href="./Rewards.html" class="rewards">
+                        <i class="giftIcon uil uil-gift"></i>
+                        Belohnungen
+                    </a>
+                </div>
+                <a class="smallLogoFirst" href="../index.html"><img src="../assets/LogoSmall.png" alt="Logo" style="height: 80%;"></a>
+                <a href="./Games.html" class="gamesFirst">
+                    <i class="controllerIcon fa fa-gamepad"></i>
+                    Casino
+                </a>
+                <a href="./Rewards.html" class="rewardsFirst">
+                    <i class="giftIcon uil uil-gift"></i>
+                    Belohnungen
+                </a>
+            </div>
+            <div class="right">
+                <div id="moneyField"></div>
+                <a class="linkLogin" href="./LoginPage.html">
+                    <div id="usernameField"></div>
+                    <i class="userIcon input-icon uil uil-user"></i>
+                </a>
+            </div>
+        </nav>
+    </header>
+    <h1>Daily Spin</h1>
+    <div id="spinGame">
+        <div id="wheel">
+            <i class="uil uil-angle-down pointer"></i>
+            <canvas id="canvas" width="434" height="434">
+                <p style="color: white">Sorry, your browser doesn't support canvas. Please try another.</p>
+            </canvas>
+        </div>
+        <div id="inputs">
+            <button id="getButton" onclick="startSpin()">Spin</button>
+        </div>
+    </div>
+    <div id="messages">
+        <div id="rewardMessage"></div>
+    </div>
+    <footer><a class="impressum" href="./Impressum.html">Impressum</a></footer>
+    <script src="../Defaults/Default.js"></script>
+    <script src="../Logic/Winwheel.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+    <script src="../Logic/Rewards.js"></script>
+</body>
+</html>

@@ -1,0 +1,189 @@
+body {
+    background-image: url('../assets/mainBackgroundLoginPage.jpg');
+    font-family: Arial, sans-serif;
+    margin: 0;
+  }
+
+h1 {
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 80px;
+    text-shadow: 0 0 2.5vh #ffeba7;
+}
+
+header {
+    text-align: center;
+}
+
+.menu {
+    max-width: 100%;
+    justify-content: space-between;
+    display: flex;
+    align-items: center;
+    background-color: black;
+    padding: 1.5vh;
+    height: 7vh;
+    box-shadow: 0 10px 10px -10px black;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 1vh;
+    height: 100%;
+}
+
+.right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1vh;
+    height: 90%;
+    margin: 2vh 1vh 2vh 0;
+}
+
+.smallLogo, .smallLogoFirst {
+    padding-top: 1vh;
+    height: 90%;
+    transition: filter 0.3s ease-in-out;
+}
+
+.smallLogo:hover, .smallLogoFirst:hover {
+    filter: drop-shadow(0 0 0.5vh white);
+}
+
+.games, .gamesFirst {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-decoration: none;
+    font-size: 2.2vh;
+    transition: box-shadow 0.3s ease-in-out;
+    padding: 0.5vh;
+}
+
+.games:hover, .gamesFirst:hover {
+    box-shadow: 0 1vh 1vh -1.2vh white;
+}
+
+.rewards, .rewardsFirst {
+    display: flex;
+    flex-direction: column;
+    color: white;
+    text-decoration: none;
+    font-size: 2.2vh;
+    transition: box-shadow 0.3s ease-in-out;
+    padding: 0.5vh;
+}
+
+.rewards:hover, .rewardsFirst:hover {
+    box-shadow: 0 1vh 1vh -1.2vh white;
+}
+
+#moneyField {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2.8vh;
+}
+
+#usernameField {
+    font-size: 2.8vh;
+}
+
+.linkLogin  {
+    display: flex;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    border-radius: 1vh;
+    box-shadow: 0;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.linkLogin:hover {
+    box-shadow: 0 1vh 1vh -1.2vh white;
+}
+
+.userIcon {
+    font-size: 2.8vh;
+    display: flex;
+    justify-content: right;
+}
+
+.impressum {
+    color: #ffeba7;
+    text-decoration: none;
+}
+
+.impressum:hover {
+    text-decoration: underline;
+    text-decoration-color: #ffeba7;
+}
+
+footer {
+    margin-top: 5vh;
+    margin-bottom: 10vh;
+    display: flex;
+    justify-content: center;
+}
+
+#nav-check {
+    display: none;
+}
+
+#iconmenu {
+    display: none;
+}
+
+.nav-links {
+    display: none;
+}
+
+@media (max-width: 1100px) {
+    .gamesFirst {
+        display: none;
+    }
+    
+    .rewardsFirst {
+        display: none;
+    }
+    
+    .smallLogoFirst {
+        display: none;
+    }
+
+    #iconmenu {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        width: 5vh;
+        height: 5vh;
+    }
+
+    .line {
+        height: 0.4vh;
+        width: 4vh;
+        border: 0.3vh solid #ffeba7;
+        border-radius: 1vh;
+        background-color: #ffeba7;
+    }
+    
+    .nav-links {
+        display: block;
+        margin: 27vh 0 0 0;
+        position: absolute;
+        display: none;
+        padding: 1vh;
+        background-color: #333;
+        z-index: 1;
+    }
+    
+    #nav-check:checked ~ .nav-links {
+        display: block;
+    }
+}

@@ -1,0 +1,22 @@
+#wrapper {
+    display: flex;
+    justify-content: center;
+    width: 75%;
+    margin: 10% 12.5% 0 12.5%;
+}
+
+#impressum {
+    color: white;
+    font-size: 150%;
+    font-family: Arial;
+    margin: 50px;
+    width: 25%;
+}
+
+#logo {
+    width: 750px;
+}
+
+#image {
+    margin: 45px;
+}

@@ -1,0 +1,89 @@
+.rewardFail {
+    width: 30%;
+    height: 7%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2vh;
+    margin-top: 4vh;
+    color: #cc0000;
+    background-color: #4d0000;
+    border: 2px solid #cc0000;
+    border-radius: 2vh;
+    font-size: 2vh;
+}
+
+.rewardSuccess {
+    width: 30%;
+    height: 7%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2vh;
+    margin-top: 4vh;
+    color: #00f510;
+    background-color: #007508;
+    border: 2px solid #00f510;
+    border-radius: 2vh;
+    font-size: 2vh;
+}
+
+#messages {
+    display: flex;
+    justify-content: center;
+}
+
+#getButton{
+    width: 10vh;
+    height: 5vh;
+    background: #ffeba7;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+#getButton:hover {
+    color: #ffeba7;
+    background-color: black;
+    box-shadow: 0 0 25px #ffeba7;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+#spinGame {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#inputs {
+    margin: 10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#wheel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.pointer {
+    color: #ffeba7;
+    font-size: 5vh;
+}
+
+#adminpage {
+    height: 20px;
+    width: 20px;
+}
+
+#adminpage a {
+    color: transparent;
+}
