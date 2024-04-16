@@ -125,3 +125,7 @@
   .backPicture:hover {
     box-shadow: 0 0 25px white;
   }
+
+  #eyeIcon {
+    margin-right: 1.5vh;
+  }

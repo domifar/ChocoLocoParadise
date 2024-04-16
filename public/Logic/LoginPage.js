@@ -1,6 +1,7 @@
 const url = 'http://localhost:3000'
 let registerMessage
 let loginMessage
+let togglePasswordInput = true
 
 const newUser = (event) => {
   event.preventDefault()
@@ -56,5 +57,35 @@ const showMessage = (outputElement, message, messageStatus) => {
   else {
     loginMessage.classList = `${messageStatus}`
     loginMessage.innerHTML = `${message}`
+  }
+}
+
+const toggleEyesIcon = (site) => {
+  const eyeIcon = document.getElementById('eyeIcon')
+  if(togglePasswordInput) {
+    eyeIcon.classList.remove('uil-eye-slash')
+    eyeIcon.classList.add('uil-eye')
+    typeChange1(site)
+  }else {
+    eyeIcon.classList.remove('uil-eye')
+    eyeIcon.classList.add('uil-eye-slash')
+    typeChange2(site)
+  }
+  togglePasswordInput = !togglePasswordInput
+}
+
+const typeChange1 = (site) => {
+  if(site === 1) {
+    document.getElementById('passwordInputLogIn').type = 'text'
+  }else {
+    document.getElementById('passwordInputRegister').type = 'text'
+  }
+}
+
+const typeChange2 = (site) => {
+  if(site === 1) {
+    document.getElementById('passwordInputLogIn').type = 'password'
+  }else {
+    document.getElementById('passwordInputRegister').type = 'password'
   }
 }
