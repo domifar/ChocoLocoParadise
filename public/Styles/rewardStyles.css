@@ -34,7 +34,7 @@
 }
 
 #getButton{
-    width: 10vh;
+    width: auto;
     height: 5vh;
     background: #ffeba7;
     border: none;

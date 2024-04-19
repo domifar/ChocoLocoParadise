@@ -39,7 +39,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: { secure: false }
-}));
+}))
 
 app.get('/login/:username/:password', (req, res) => {
   let returnMessage
@@ -54,6 +54,7 @@ app.get('/login/:username/:password', (req, res) => {
       if(chosenUser.password == password) {
         req.session.username = chosenUser.username
         req.session.money = chosenUser.money
+        req.session.lastreward = chosenUser.lastreward
         returnMessage = 'success'
       }else {
         returnMessage = 'passwordFail'
@@ -81,14 +82,16 @@ app.get('/register/:username/:password', (req, res) => {
       returnMessage = 'alreadyExist'
     }else {
       req.session.username = username
-      req.session.money  = "100"
+      req.session.money = "100"
+      req.session.lastreward = "null"
       data.push({
         username: username,
         password: password,
-        money: "100"
+        money: "100",
+        lastreward: "null"
       })
       fs.writeFile('./public/Database/Users.txt', JSON.stringify(data), 'utf8', function(err){
-           if (err) throw err;
+         if (err) throw err;
       })
       returnMessage = 'success'
     }
@@ -99,35 +102,35 @@ app.get('/register/:username/:password', (req, res) => {
   })
 })
 
-app.get('/rewards', (req, res) => {
-  const currentTime = new Date()
-  const lastrewardDate = new Date(req.session.lastreward)
+// app.get('/rewards', (req, res) => {
+//   const currentTime = new Date()
+//   const lastrewardDate = new Date(req.session.lastreward)
 
-  if(lastrewardDate.getMinutes() <= currentTime.getMinutes() - 1) {
-    req.session.money = update(req.session.username, 100)
-    req.session.lastreward = currentTime
-    res.send(JSON.stringify({
-      message: 'worked'
-    }))
-  }else {
-    res.send(JSON.stringify({
-      message: 'notAvailable'
-    }))
-  }
-})
+//   if(lastrewardDate.getMinutes() <= currentTime.getMinutes() - 1) {
+//     req.session.money = updateMoney(req.session.username, 100)
+//     req.session.lastreward = currentTime
+//     res.send(JSON.stringify({
+//       message: 'worked'
+//     }))
+//   }else {
+//     res.send(JSON.stringify({
+//       message: 'notAvailable'
+//     }))
+//   }
+// })
 
-app.get('/rewardstatus', (req, res) => {
-  if(req.session.lastreward) {
-    res.send(JSON.stringify({
-      lastreward: req.session.lastreward
-    }))
-  }
-  else {
-    res.send(JSON.stringify({
-      lastreward: 'noReward'
-  }))
-  }
-})
+// app.get('/rewardstatus', (req, res) => {
+//   if(req.session.lastreward) {
+//     res.send(JSON.stringify({
+//       lastreward: req.session.lastreward
+//     }))
+//   }
+//   else {
+//     res.send(JSON.stringify({
+//       lastreward: 'noReward'
+//   }))
+//   }
+// })
 
 app.get('/user', (req, res) => {
   if(req.session.username && req.session.money) {
@@ -221,12 +224,10 @@ app.get('/minetap/:tapid', async (req, res) => {
       const tappedmineid = tappedmine.split('')
 
       let tappedfield = req.session.minesBoard[tappedmineid[0]][tappedmineid[1]]
-
-      const multiplyer = multipliersMineGame[req.session.minesBoard[6] - 1][req.session.minesBoard[7] - 1]
+      const multiplyer = multipliersMineGame[req.session.minesBoard[6] - 1][req.session.minesBoard[7]]
       const potentialTake = `${(req.session.minesBoard[5] * multiplyer).toFixed(2)}`
-
       if(tappedfield == 'mine') {
-        req.session.money = await update(req.session.username, -(req.session.minesBoard[5]))
+        req.session.money = await updateMoney(req.session.username, -(req.session.minesBoard[5]))
         boardreturn = req.session.minesBoard
         req.session.minesBoard = undefined
       }else {
@@ -234,7 +235,7 @@ app.get('/minetap/:tapid', async (req, res) => {
         if(req.session.minesBoard[7] >= (25 - req.session.minesBoard[6])) {
           tappedfield = 'finish'
           boardreturn = req.session.minesBoard
-          req.session.money = await update(req.session.username, (req.session.minesBoard[5] * (multipliersMineGame[req.session.minesBoard[6] - 1][req.session.minesBoard[7] - 1])) - req.session.minesBoard[5])
+          req.session.money = await updateMoney(req.session.username, (req.session.minesBoard[5] * (multipliersMineGame[req.session.minesBoard[6] - 1][req.session.minesBoard[7] - 1])) - req.session.minesBoard[5])
           req.session.minesBoard = undefined
         }
       }
@@ -262,7 +263,7 @@ app.get('/minescashout', async (req, res) => {
       const board = req.session.minesBoard
       const multiplyer = multipliersMineGame[board[6] - 1][board[7] - 1]
       const wonmoney = board[5] * multiplyer
-      req.session.money = await update(req.session.username, wonmoney - board[5])
+      req.session.money = await updateMoney(req.session.username, wonmoney - board[5])
       req.session.minesBoard = undefined
       res.send(JSON.stringify({
         wonmoney: wonmoney,
@@ -291,46 +292,81 @@ app.get('/wheelspin', async (req, res) => {
   let returnMessage
 
   if(req.session.username) {
-    const segment = Math.floor(Math.random() * 8) + 1
-    const segmentDegree = (Math.floor(Math.random() * 35) + 1) + 5
-    switch (segment) {
-      case 1:
-        returnMessage = '' + (segmentDegree + 0)
-        req.session.money = await update(req.session.username, 1)
-        break;
-      case 2:
-        returnMessage = '' + (segmentDegree + 45)
-        req.session.money = await update(req.session.username, 10)
-        break;
-      case 3:
-        returnMessage = '' + (segmentDegree + 90)
-        req.session.money = await update(req.session.username, 100)
-        break;
-      case 4:
-        returnMessage = '' + (segmentDegree + 135)
-        req.session.money = await update(req.session.username, 1000)
-        break;
-      case 5:
-        returnMessage = '' + (segmentDegree + 180)
-        req.session.money = await update(req.session.username, 1)
-        break;
-      case 6:
-        returnMessage = '' + (segmentDegree + 225)
-        req.session.money = await update(req.session.username, 10)
-        break;
-      case 7:
-        returnMessage = '' + (segmentDegree + 270)
-        req.session.money = await update(req.session.username, 100)
-        break;
-      case 8:
-        returnMessage = '' + (segmentDegree + 315)
-        req.session.money = await update(req.session.username, 1000)
-        break;
-      default:
-        returnMessage = 'servus'
+    const today = new Date(new Date().toUTCString())
+    today.setHours(0, 0, 0, 0)
+    const lastreward = new Date(req.session.lastreward)
+    
+    console.log("heute: " + today + "\nlastreward: " + lastreward)
+    if(req.session.lastreward == "null" || lastreward.getTime() < today.getTime()) {
+      req.session.lastreward = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+      await updateLastReward(req.session.username, req.session.lastreward)
+      const segment = Math.floor(Math.random() * 8) + 1
+      const segmentDegree = (Math.floor(Math.random() * 35) + 1) + 5
+      switch (segment) {
+        case 1:
+          returnMessage = '' + (segmentDegree + 0)
+          req.session.money = await updateMoney(req.session.username, 1)
+          break
+        case 2:
+          returnMessage = '' + (segmentDegree + 45)
+          req.session.money = await updateMoney(req.session.username, 10)
+          break
+        case 3:
+          returnMessage = '' + (segmentDegree + 90)
+          req.session.money = await updateMoney(req.session.username, 100)
+          break
+        case 4:
+          returnMessage = '' + (segmentDegree + 135)
+          req.session.money = await updateMoney(req.session.username, 1000)
+          break
+        case 5:
+          returnMessage = '' + (segmentDegree + 180)
+          req.session.money = await updateMoney(req.session.username, 1)
+          break
+        case 6:
+          returnMessage = '' + (segmentDegree + 225)
+          req.session.money = await updateMoney(req.session.username, 10)
+          break
+        case 7:
+          returnMessage = '' + (segmentDegree + 270)
+          req.session.money = await updateMoney(req.session.username, 100)
+          break
+        case 8:
+          returnMessage = '' + (segmentDegree + 315)
+          req.session.money = await updateMoney(req.session.username, 1000)
+          break
+        default:
+          returnMessage = 'servus'
+          break
+      }
+    }else {
+      returnMessage == 'notReady'
     }
   }else {
     returnMessage = 'nooneLoggedIn'
+  }
+
+  res.send(JSON.stringify({
+    message: returnMessage
+  }))
+})
+
+app.get('/rewardstatus', (req, res) => {
+  let returnMessage
+
+  if(req.session.username) {
+    const today = new Date(new Date().toUTCString())
+    today.setHours(0, 0, 0, 0)
+    const lastreward = new Date(req.session.lastreward)
+    
+    // console.log("heute: " + today + "\nlastreward: " + lastreward)
+    if(req.session.lastreward == "null" || lastreward.getTime() < today.getTime()) {
+      returnMessage = 'Ready'
+    }else {
+      returnMessage = 'notReady'
+    }
+  }else {
+    returnMessage = 'noOneLoggedIn'
   }
 
   res.send(JSON.stringify({
@@ -354,7 +390,7 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-const update = async (username, money) => {
+const updateMoney = async (username, money) => {
   return new Promise((resolve, reject) => {
     fs.readFile('./public/Database/Users.txt', 'utf8', function(err, data){
       if (err) reject(err);
@@ -366,6 +402,23 @@ const update = async (username, money) => {
       fs.writeFile('./public/Database/Users.txt', JSON.stringify(data), 'utf8', function(err){
         if (err) reject(err);
         resolve(changedUser.money)
+      })
+    })
+  })
+}
+
+const updateLastReward = async (username, rewardDate) => {
+  return new Promise((resolve, reject) => {
+    fs.readFile('./public/Database/Users.txt', 'utf8', function(err, data){
+      if (err) reject(err);
+      data = JSON.parse(data)
+      let changedUser = data.find(user => user.username == username)
+      changedUser.lastreward = rewardDate
+      data = data.filter(user => user.username != username)
+      data.push(changedUser)
+      fs.writeFile('./public/Database/Users.txt', JSON.stringify(data), 'utf8', function(err){
+        if (err) reject(err);
+        resolve('success')
       })
     })
   })
