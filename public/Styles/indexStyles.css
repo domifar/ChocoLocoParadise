@@ -72,6 +72,11 @@
   background-size: cover;
 }
 
+#diceCard {
+  background-image: url('../assets/DiceGame.png');
+  background-size: cover;
+}
+
 ::-webkit-scrollbar {
   width: 10px;
 }

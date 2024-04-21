@@ -102,36 +102,6 @@ app.get('/register/:username/:password', (req, res) => {
   })
 })
 
-// app.get('/rewards', (req, res) => {
-//   const currentTime = new Date()
-//   const lastrewardDate = new Date(req.session.lastreward)
-
-//   if(lastrewardDate.getMinutes() <= currentTime.getMinutes() - 1) {
-//     req.session.money = updateMoney(req.session.username, 100)
-//     req.session.lastreward = currentTime
-//     res.send(JSON.stringify({
-//       message: 'worked'
-//     }))
-//   }else {
-//     res.send(JSON.stringify({
-//       message: 'notAvailable'
-//     }))
-//   }
-// })
-
-// app.get('/rewardstatus', (req, res) => {
-//   if(req.session.lastreward) {
-//     res.send(JSON.stringify({
-//       lastreward: req.session.lastreward
-//     }))
-//   }
-//   else {
-//     res.send(JSON.stringify({
-//       lastreward: 'noReward'
-//   }))
-//   }
-// })
-
 app.get('/user', (req, res) => {
   if(req.session.username && req.session.money) {
     res.send(JSON.stringify({
@@ -271,8 +241,8 @@ app.get('/minescashout', async (req, res) => {
         board: board
       }))
     } catch (err) {
-      console.error(err);
-      res.status(500).send('Ein Fehler ist aufgetreten');
+      console.error(err)
+      res.status(500).send('Ein Fehler ist aufgetreten')
     }
   }else {
     res.send(JSON.stringify({
@@ -358,8 +328,6 @@ app.get('/rewardstatus', (req, res) => {
     const today = new Date(new Date().toUTCString())
     today.setHours(0, 0, 0, 0)
     const lastreward = new Date(req.session.lastreward)
-    
-    // console.log("heute: " + today + "\nlastreward: " + lastreward)
     if(req.session.lastreward == "null" || lastreward.getTime() < today.getTime()) {
       returnMessage = 'Ready'
     }else {
@@ -377,14 +345,6 @@ app.get('/rewardstatus', (req, res) => {
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, '/public/Sites/NoSite.html'))
 })
-
-// app.use('/Logic/DatabaseHandler.js', function(req, res) {
-//   res.send('<h1>403 ZUGRIFF VERWEIGERT</h1><p><h2>Keine Rechte auf diese Seite</h2></p>')
-// });
-
-// app.use('/Database/Users.txt', function(req, res) {
-//   res.send('<h1>403 ZUGRIFF VERWEIGERT</h1><p><h2>Keine Rechte auf diese Seite</h2></p>')
-// })
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

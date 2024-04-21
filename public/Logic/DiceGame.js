@@ -1,22 +1,3 @@
-<!DOCTYPE html>
-<html>
-<body>
-
-<input type="number" id="bet" min="1" max="100" oninput="updateBar()">
-<button id="modeButton" onclick="toggleMode()">Roll Over</button>
-<button onclick="playGame()">Spielen</button>
-
-<p id="result"></p>
-
-<div id="progressBar" style="display: flex; align-items: center; width: 100%; background-color: #ddd; position: relative; height: 20px;">
-  <div id="winBar" style="position: absolute; height: 20px; background-color: green; transition: width 0.5s, left 0.5s;"></div>
-  <div id="loseBar" style="position: absolute; height: 20px; background-color: red; transition: width 0.5s, left 0.5s;"></div>
-  <div id="diceMarker" style="position: absolute; width: 30px; height: 30px; line-height: 30px; text-align: center; background-color: white; border: 1px solid black; border-radius: 15%; transition: left 0.5s, transform 0.5s;">
-    <span id="dice"></span>
-  </div>
-</div>
-
-<script>
 var mode = 'over';
 var rotation = 0;
 
@@ -59,7 +40,3 @@ function playGame() {
     document.getElementById('result').style.color = 'red';
   }
 }
-</script>
-
-</body>
-</html>

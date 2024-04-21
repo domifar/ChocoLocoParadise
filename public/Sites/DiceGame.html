@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Games - ChocoLocoParadise</title>
+    <title>Dice - ChocoLocoParadise</title>
     <link rel="icon" type="image/png" href="../assets/Logo.png">
+    <link rel="stylesheet" href="../Defaults/Default.css">
+    <link rel="stylesheet" href="../Styles/DiceGameStyles.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../Defaults/Default.css">
-    <link rel="stylesheet" href="../Styles/gamesStyles.css">
 </head>
 <body>
     <header>
@@ -50,74 +50,21 @@
             </div>
         </nav>
     </header>
-    <div class="games-show">
-        <div class="gamecards">
-            <a href="./MinesGame.html" class="gamecard" id="minesCard">
-            
-            </a>
-            <a href="./DiceGame.html" class="gamecard" id="diceCard">
-                
-            </a>
-            <div class="gamecard">
-                
-            </div>
-            <div class="gamecard">
-                
-            </div>
-            <div class="gamecard">
-                
-            </div>
-            <div class="gamecard">
-                
-            </div>
-            <div class="gamecard">
-                
-            </div>
-            <div class="gamecard">
-            
-            </div>
-            <div class="gamecard">
-                
-            </div>
-            <div class="gamecard">
-                
-            </div>
-            <div class="gamecard">
-                
-            </div>
-            <div class="gamecard">
-                
-            </div>
-            <div class="gamecard">
-                
-            </div>
-            <div class="gamecard">
-                
-            </div>
-            <div class="gamecard">
-            
-            </div>
-            <div class="gamecard">
-                
-            </div>
-            <div class="gamecard">
-                
-            </div>
-            <div class="gamecard">
-                
-            </div>
-            <div class="gamecard">
-                
-            </div>
-            <div class="gamecard">
-                
-            </div>
-            <div class="gamecard">
-                
-            </div>
-        </div>
+    <input type="number" id="bet" min="1" max="100" oninput="updateBar()">
+    <button id="modeButton" onclick="toggleMode()">Roll Over</button>
+    <button onclick="playGame()">Spielen</button>
+
+    <p id="result"></p>
+
+    <div id="progressBar">
+    <div id="winBar"></div>
+    <div id="loseBar"></div>
+    <div id="diceMarker">
+        <span id="dice"></span>
+    </div>
     </div>
     <footer><a class="impressum" href="./Impressum.html">Impressum</a></footer>
     <script src="../Defaults/Default.js"></script>
+    <script src="../Logic/DiceGame.js"></script>
 </body>
 </html>

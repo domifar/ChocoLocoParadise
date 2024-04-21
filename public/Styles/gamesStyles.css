@@ -1,0 +1,38 @@
+.games-show {
+    margin-top: 5vh;
+    padding: 1vh 0 2vh 0;
+    width: 100%;
+}
+
+.gamecard {
+    flex-shrink: 0;
+    margin: 5vh;
+    width: 30vh;
+    height: 40vh;
+    border-radius: 2vh;
+    border: 2px solid #38170e; 
+    background-color: gray;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.gamecard:hover {
+    box-shadow: 0 0 15px #38170e;
+}
+
+.gamecards {
+    margin: 0 2vh 0 2vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    overflow-x: auto;
+}
+
+#minesCard {
+    background-image: url('../assets/minesGame.png');
+    background-size: cover;
+}
+
+#diceCard {
+    background-image: url('../assets/DiceGame.png');
+    background-size: cover;
+}

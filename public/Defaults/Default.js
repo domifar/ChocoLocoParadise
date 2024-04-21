@@ -1,4 +1,4 @@
-const url = 'http://10.10.0.53:3000'
+const url = 'http://localhost:3000'
 
 const getUserData = () => {
   fetch(url + '/user')

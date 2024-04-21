@@ -217,3 +217,76 @@ admin page
     <script src="../Defaults/Default.js"></script>
 </body>
 </html>
+-------------------------------------------------
+dice
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #numberLine { width: 100%; height: 20px; position: relative; }
+        #marker { width: 2px; height: 20px; background: black; position: absolute; left: 1%; display: none; transition: left 2s; }
+        #point { width: 10px; height: 10px; background: blue; position: absolute; left: 1%; bottom: -5px; border-radius: 50%; display: none; transition: left 0.5s ease-out; }
+        .btn { padding: 10px 20px; font-size: 20px; margin: 20px; cursor: pointer; }
+
+        #newLine{
+            background-color: blue;
+            height: 10px;
+            width: 50px;
+            transition: width 2s ease-out;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Number Line</h2>
+
+<div id="numberLine">
+    <div id="marker"></div>
+    <div id="point"></div>
+</div>
+
+<button class="btn" onclick="placePoint(50)">Place Point at 50</button>
+<button class="btn" onclick="placeMarker(30)">Place Marker at 30</button>
+<button class="btn" onclick="swapColors()">Swap Colors</button>
+
+<div id="newLine"></div>
+<button class="btn" onclick="klickei()">butn</button>
+
+<script>
+    var numberLine = document.getElementById('numberLine');
+    var marker = document.getElementById('marker');
+    var point = document.getElementById('point');
+    var isRedFirst = true;
+
+    function placePoint(position) {
+        point.style.left = position + '%';
+        point.style.display = 'block';
+    }
+
+    function placeMarker(position) {
+        marker.style.left = position + '%';
+        marker.style.display = 'block';
+        setColors(position);
+    }
+
+    function setColors(position) {
+        if (isRedFirst) {
+            numberLine.style.background = 'linear-gradient(to right, red ' + position + '%, green ' + position + '%)';
+        } else {
+            numberLine.style.background = 'linear-gradient(to right, green ' + position + '%, red ' + position + '%)';
+        }
+    }
+
+    function swapColors() {
+        isRedFirst = !isRedFirst;
+        var position = parseInt(marker.style.left);
+        setColors(position);
+    }
+
+    function klickei () {
+        document.getElementById('newLine').style.width = "500px"
+    }
+</script>
+
+</body>
+</html>
