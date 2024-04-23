@@ -50,21 +50,28 @@
             </div>
         </nav>
     </header>
-    <input type="number" id="bet" min="1" max="100" oninput="updateBar()">
-    <button id="modeButton" onclick="toggleMode()">Roll Over</button>
-    <button onclick="playGame()">Spielen</button>
-
-    <p id="result"></p>
-
-    <div id="progressBar">
-    <div id="winBar"></div>
-    <div id="loseBar"></div>
-    <div id="diceMarker">
-        <span id="dice"></span>
+    <div id="game">
+        <div id="bar">
+            <div id="progressBar">
+                <div id="winBar"></div>
+                <div id="loseBar"></div>
+                <div id="diceMarker">
+                    <span id="dice"></span>
+                </div>
+            </div>
+        </div>
+        <div id="inputs">
+            <input value="10" type="number" id="bet">
+            <input value="50" type="number" id="inputRange" min="1" max="100" oninput="updateBar()">
+            <button class="diceButton" id="modeButton" onclick="toggleMode()">Darüber</button>
+            <button class="diceButton" onclick="playGame()">Spielen</button>
+        </div>
+        <div id="right"></div>
     </div>
-    </div>
+    
+
     <footer><a class="impressum" href="./Impressum.html">Impressum</a></footer>
     <script src="../Defaults/Default.js"></script>
     <script src="../Logic/DiceGame.js"></script>
 </body>
-</html>
+</html>y

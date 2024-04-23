@@ -265,8 +265,6 @@ app.get('/wheelspin', async (req, res) => {
     const today = new Date(new Date().toUTCString())
     today.setHours(0, 0, 0, 0)
     const lastreward = new Date(req.session.lastreward)
-    
-    console.log("heute: " + today + "\nlastreward: " + lastreward)
     if(req.session.lastreward == "null" || lastreward.getTime() < today.getTime()) {
       req.session.lastreward = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
       await updateLastReward(req.session.username, req.session.lastreward)
@@ -339,6 +337,26 @@ app.get('/rewardstatus', (req, res) => {
 
   res.send(JSON.stringify({
     message: returnMessage
+  }))
+})
+
+app.get('/dice/:bet/:range/:side', (req, res) => {
+  let returnMessage
+  let money
+  const bet = req.params.bet
+  const range = req.params.bet
+  const side = req.params.side
+
+  if(req.session.username) {
+    
+  }else {
+    returnMessage = 'nooneLoggedIn'
+    money = 0
+  }
+
+  res.send(JSON.stringify({
+    message: returnMessage,
+    wonmoney: money
   }))
 })
 
