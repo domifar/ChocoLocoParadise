@@ -343,19 +343,30 @@ app.get('/rewardstatus', (req, res) => {
 app.get('/dice/:bet/:range/:side', (req, res) => {
   let returnMessage
   let money
-  const bet = req.params.bet
-  const range = req.params.bet
+  let number
+  const bet = parseInt(req.params.bet)
+  const range = parseInt(req.params.bet)
   const side = req.params.side
 
   if(req.session.username) {
+    returnMessage = 'success'
+    do {
+      number = Math.floor(Math.random() * 100) + 1
+    }while(number == range)
+
+    if((side == 'over' && number > inputRange) || (mode == 'under' && number < inputRange)) {
+      money = 1 / (1 / range) * bet
+    }
     
   }else {
     returnMessage = 'nooneLoggedIn'
+    number = 50
     money = 0
   }
 
   res.send(JSON.stringify({
     message: returnMessage,
+    number: number,
     wonmoney: money
   }))
 })
