@@ -354,8 +354,10 @@ app.get('/dice/:bet/:range/:side', (req, res) => {
       number = Math.floor(Math.random() * 100) + 1
     }while(number == range)
 
-    if((side == 'over' && number > inputRange) || (mode == 'under' && number < inputRange)) {
+    if((side == 'over' && number > range) || (side == 'under' && number < range)) {
       money = 1 / (1 / range) * bet
+    }else {
+      money = 0
     }
     
   }else {

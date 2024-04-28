@@ -30,16 +30,17 @@ const playGame = () => {
   fetch(url + '/dice/' + document.getElementById('bet').value + '/' + inputRange + '/' + mode)
   .then(response => response.json())
   .then(data => {
+    console.log(data)
     if(data.message == 'success') {
-      dice = data.number
-      document.getElementById('result').innerHTML = data.money
+      dice = parseInt(data.number)
+      document.getElementById('result').innerHTML = data.wonmoney
+      document.getElementById('dice').textContent = dice
+      document.getElementById('diceMarker').style.left = dice + '%'
+      rotation += 360
+      document.getElementById('diceMarker').style.transform = 'rotate(' + rotation + 'deg)'
     }
   })
 
-  document.getElementById('dice').textContent = dice
-  document.getElementById('diceMarker').style.left = dice + '%'
-  rotation += 360
-  document.getElementById('diceMarker').style.transform = 'rotate(' + rotation + 'deg)'
 }
 
 updateBar()
