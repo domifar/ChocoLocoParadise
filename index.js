@@ -344,6 +344,7 @@ app.get('/dice/:bet/:range/:side', (req, res) => {
   let returnMessage
   let money
   let number
+  console.log(req.params)
   const bet = parseInt(req.params.bet)
   const range = parseInt(req.params.bet)
   const side = req.params.side
