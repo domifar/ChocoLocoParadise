@@ -1,4 +1,4 @@
-const url = 'http://localhost:3000'
+const url = 'http://10.10.3.64:3000'
 let registerMessage
 let loginMessage
 let togglePasswordInput = true

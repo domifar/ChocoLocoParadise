@@ -344,9 +344,8 @@ app.get('/dice/:bet/:range/:side', (req, res) => {
   let returnMessage
   let money
   let number
-  console.log(req.params)
   const bet = parseInt(req.params.bet)
-  const range = parseInt(req.params.bet)
+  const range = parseInt(req.params.range)
   const side = req.params.side
 
   if(req.session.username) {
@@ -356,7 +355,7 @@ app.get('/dice/:bet/:range/:side', (req, res) => {
     }while(number == range)
 
     if((side == 'over' && number > range) || (side == 'under' && number < range)) {
-      money = 1 / (1 / range) * bet
+      money = 100 * (1 / range) * bet
     }else {
       money = 0
     }
@@ -440,9 +439,8 @@ const checkBet = (value, userMoney) => {
     return 1
   } else {
     let num = parseFloat(value);
-    if (!isNaN(num) && Number.isInteger(num)) {
-        num = parseInt(num)
-        if(num > parseInt(userMoney)) {
+    if (!isNaN(num)) {
+        if(num > parseFloat(userMoney)) {
           return userMoney
         }else if(num <= 0) {
           return 1
