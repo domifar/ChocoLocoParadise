@@ -117,7 +117,7 @@ app.get('/user', (req, res) => {
       text: 'fail'
   }))
   }
-});
+})
 
 app.get('/convertJson', (req, res) => {
   fs.readFile('./public/Database/Users.txt', 'utf-8', (err, data) => {
