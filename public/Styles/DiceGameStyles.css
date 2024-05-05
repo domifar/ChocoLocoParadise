@@ -96,3 +96,48 @@ input {
 input:hover {
     border-color: #ffeba7;
 }
+
+.gameMessageNormal {
+    width: 40%;
+    height: 7%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-top: 30px;
+    color: #ffeba7;
+    background-color: #755a00;
+    border: 2px solid #ffeba7;
+    border-radius: 20px;
+    font-size: 2vh;
+}
+
+.gameMessageSuccess {
+    width: 40%;
+    height: 7%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-top: 30px;
+    color: #00f510;
+    background-color: #007508;
+    border: 2px solid #00f510;
+    border-radius: 20px;
+    font-size: 2vh;
+}
+
+.gameMessageFail {
+    width: 40%;
+    height: 7%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    margin-top: 30px;
+    color: #cc0000;
+    background-color: #4d0000;
+    border: 2px solid #cc0000;
+    border-radius: 20px;
+    font-size: 2vh;
+}

@@ -91,7 +91,7 @@ app.get('/register/:username/:password', (req, res) => {
         lastreward: "null"
       })
       fs.writeFile('./public/Database/Users.txt', JSON.stringify(data), 'utf8', function(err){
-         if (err) throw err;
+         if (err) throw err
       })
       returnMessage = 'success'
     }
@@ -124,14 +124,14 @@ app.get('/convertJson', (req, res) => {
     if(err) throw err
     data = JSON.parse(data)
 
-    let jsonData = JSON.stringify(data, null, '\t');
+    let jsonData = JSON.stringify(data, null, '\t')
 
     fs.writeFile('./public/Database/data.json', jsonData, (err) => {
       if (err) {
-          console.error(err);
-          return;
+          console.error(err)
+          return
       }
-    });
+    })
   })
 })
 
@@ -144,22 +144,22 @@ app.get('/newminefield/:minescount/:bet', (req, res) => {
       bet = -1
     }
 
-    req.session.minesBoard = new Array(9);
+    req.session.minesBoard = new Array(9)
     req.session.minesBoard[5] = bet
     req.session.minesBoard[6] = minescount
     req.session.minesBoard[7] = 0
     req.session.minesBoard[8] = new Array()
     for (var i = 0; i < 5; i++) {
-      req.session.minesBoard[i] = new Array(5).fill('schoko');
+      req.session.minesBoard[i] = new Array(5).fill('schoko')
     }
 
     for (var i = 0; i < minescount; i++) {
-        var x, y;
+        var x, y
         do {
-            x = Math.floor(Math.random() * 5);
-            y = Math.floor(Math.random() * 5);
-        } while (req.session.minesBoard[x][y] === 'mine');
-        req.session.minesBoard[x][y] = 'mine';
+            x = Math.floor(Math.random() * 5)
+            y = Math.floor(Math.random() * 5)
+        } while (req.session.minesBoard[x][y] === 'mine')
+        req.session.minesBoard[x][y] = 'mine'
     }
 
     if(bet == -1) {
@@ -340,24 +340,30 @@ app.get('/rewardstatus', (req, res) => {
   }))
 })
 
-app.get('/dice/:bet/:range/:side', (req, res) => {
+app.get('/dice/:bet/:range/:side', async (req, res) => {
   let returnMessage
   let money
   let number
-  const bet = parseInt(req.params.bet)
-  const range = parseInt(req.params.range)
-  const side = req.params.side
+  let bet = parseInt(req.params.bet)
+  let range = parseInt(req.params.range)
+  let side = req.params.side
 
   if(req.session.username) {
-    returnMessage = 'success'
+    bet = checkBet(bet, req.session.money)
+    range = checkDiceRange(range)
+
     do {
       number = Math.floor(Math.random() * 100) + 1
     }while(number == range)
+      
+    money = 100 * (1 / range) * bet  
 
     if((side == 'over' && number > range) || (side == 'under' && number < range)) {
-      money = 100 * (1 / range) * bet
+      req.session.money = await updateMoney(req.session.username, money)
+      returnMessage = 'success'
     }else {
-      money = 0
+      req.session.money = await updateMoney(req.session.username, -(bet))
+      returnMessage = 'fail'
     }
     
   }else {
@@ -369,7 +375,8 @@ app.get('/dice/:bet/:range/:side', (req, res) => {
   res.send(JSON.stringify({
     message: returnMessage,
     number: number,
-    wonmoney: money
+    wonmoney: money,
+    bet: bet
   }))
 })
 
@@ -384,14 +391,14 @@ app.listen(port, () => {
 const updateMoney = async (username, money) => {
   return new Promise((resolve, reject) => {
     fs.readFile('./public/Database/Users.txt', 'utf8', function(err, data){
-      if (err) reject(err);
+      if (err) reject(err)
       data = JSON.parse(data)
       let changedUser = data.find(user => user.username == username)
       changedUser.money = `${(parseFloat(changedUser.money) + money).toFixed(2)}`
       data = data.filter(user => user.username != username)
       data.push(changedUser)
       fs.writeFile('./public/Database/Users.txt', JSON.stringify(data), 'utf8', function(err){
-        if (err) reject(err);
+        if (err) reject(err)
         resolve(changedUser.money)
       })
     })
@@ -401,14 +408,14 @@ const updateMoney = async (username, money) => {
 const updateLastReward = async (username, rewardDate) => {
   return new Promise((resolve, reject) => {
     fs.readFile('./public/Database/Users.txt', 'utf8', function(err, data){
-      if (err) reject(err);
+      if (err) reject(err)
       data = JSON.parse(data)
       let changedUser = data.find(user => user.username == username)
       changedUser.lastreward = rewardDate
       data = data.filter(user => user.username != username)
       data.push(changedUser)
       fs.writeFile('./public/Database/Users.txt', JSON.stringify(data), 'utf8', function(err){
-        if (err) reject(err);
+        if (err) reject(err)
         resolve('success')
       })
     })
@@ -419,7 +426,7 @@ const checkMinesCount = (value) => {
   if (value == '') {
     return 1
   } else {
-    let num = parseFloat(value);
+    let num = parseFloat(value)
     if (!isNaN(num) && Number.isInteger(num)) {
         num = parseInt(num)
         if(num >= 25) {
@@ -438,7 +445,7 @@ const checkBet = (value, userMoney) => {
   if (value == '') {
     return 1
   } else {
-    let num = parseFloat(value);
+    let num = parseFloat(value)
     if (!isNaN(num)) {
         if(num > parseFloat(userMoney)) {
           return userMoney
@@ -448,6 +455,25 @@ const checkBet = (value, userMoney) => {
         return num
     } else {
       return 1
+    }
+  }
+}
+
+const checkDiceRange = (range) => {
+  if (range == '') {
+    return 50
+  } else {
+    let num = parseFloat(range)
+    if (!isNaN(num) && Number.isInteger(num)) {
+        num = parseInt(num)
+        if(num > 99) {
+          return 99
+        }else if(num < 1) {
+          return 1
+        }
+        return num
+    } else {
+      return 50
     }
   }
 }
