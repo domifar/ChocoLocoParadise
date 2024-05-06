@@ -355,14 +355,21 @@ app.get('/dice/:bet/:range/:side', async (req, res) => {
     do {
       number = Math.floor(Math.random() * 100) + 1
     }while(number == range)
-      
-    money = 100 * (1 / range) * bet  
+    
+    if(range < 50) {
+      money = 100 / (range + 50) * bet  
+    }else if (range > 50) {
+      money = 100 / (range - 50) * bet  
+    }else {
+      money = bet * 2
+    }
 
     if((side == 'over' && number > range) || (side == 'under' && number < range)) {
       req.session.money = await updateMoney(req.session.username, money)
       returnMessage = 'success'
     }else {
       req.session.money = await updateMoney(req.session.username, -(bet))
+      money = bet
       returnMessage = 'fail'
     }
     
