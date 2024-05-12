@@ -40,9 +40,10 @@ const updateBar = () => {
 }
 
 const playGame = () => {
+  const playButton = document.getElementById('playButton')
   let inputRange = document.getElementById('inputRange').value
   let dice
-
+  playButton.disabled = true
   fetch(url + '/dice/' + document.getElementById('bet').value + '/' + inputRange + '/' + mode)
   .then(response => response.json())
   .then(data => {
@@ -55,10 +56,11 @@ const playGame = () => {
       document.getElementById('diceMarker').style.left = dice + '%'
       document.getElementById('diceMarker').style.transform = 'rotate(' + rotation + 'deg)'
       setTimeout(() => {
+        playButton.disabled = false
         if(data.message == 'success') {
-          print('gameMessageSuccess', data.wonmoney + '<img style="width:2.2vh; height:2.2vh;" src="../assets/Coin.png" alt="Coin">')
+          print('gameMessageSuccess', data.wonmoney.toFixed(2) + '<img style="width:2.2vh; height:2.2vh;" src="../assets/Coin.png" alt="Coin">')
         } else {
-          print('gameMessageFail', data.wonmoney + '<img style="width:2.2vh; height:2.2vh;" src="../assets/Coin.png" alt="Coin">')
+          print('gameMessageFail', data.wonmoney.toFixed(2) + '<img style="width:2.2vh; height:2.2vh;" src="../assets/Coin.png" alt="Coin">')
         }
         getUserData()
       }, 500)
