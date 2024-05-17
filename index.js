@@ -358,9 +358,9 @@ app.get('/dice/:bet/:range/:side', async (req, res) => {
     
     if(side == 'over') {
       let temp = 100 - range
-      money = 100 / temp * bet
+      money = (100 / temp * bet) - bet
     }else {
-      money = 100 / range * bet
+      money = (100 / range * bet) - bet
     }
 
     if((side == 'over' && number > range) || (side == 'under' && number < range)) {
