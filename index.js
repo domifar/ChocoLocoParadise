@@ -358,13 +358,13 @@ app.get('/dice/:bet/:range/:side', async (req, res) => {
     
     if(side == 'over') {
       let temp = 100 - range
-      money = (100 / temp * bet) - bet
+      money = (100 / temp * bet)
     }else {
-      money = (100 / range * bet) - bet
+      money = (100 / range * bet)
     }
 
     if((side == 'over' && number > range) || (side == 'under' && number < range)) {
-      req.session.money = await updateMoney(req.session.username, money)
+      req.session.money = await updateMoney(req.session.username, money - bet)
       returnMessage = 'success'
     }else {
       req.session.money = await updateMoney(req.session.username, -(bet))
