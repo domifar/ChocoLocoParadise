@@ -3,64 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Admin Page</title>
     <link rel="icon" type="image/png" href="../assets/Logo.png">
     <link rel="stylesheet" href="../Defaults/Default.css">
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <style>
-        #container {
-            display: flex;
-            justify-content: center;
-        }
-        #wrapper {
-            margin-top: 5vh;
-            width: 50%;
-            height: 50vh;
-            border: 2px solid white;
-            border-radius: 12px;
-            -webkit-backdrop-filter: blur(1vh);
-            backdrop-filter: blur(1vh);
-        }
-        #sendButton{
-            margin: 3vh;
-            width: 20vh;
-            height: 5vh;
-            background: #ffeba7;
-            border: none;
-            outline: none;
-            border-radius: 40px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, .1);
-            cursor: pointer;
-            font-size: 16px;
-            color: #333;
-            font-weight: 600;
-            transition: box-shadow 0.3s ease-in-out;
-        }
-
-        #sendButton:hover {
-            color: #ffeba7;
-            background-color: black;
-            box-shadow: 0 0 25px #ffeba7;
-            transition: box-shadow 0.3s ease-in-out;
-        }
-
-        input {
-            width: 50vh;
-            background: transparent;
-            border: none;
-            outline: none;
-            border: 2px solid rgba(255, 255, 255, .2);
-            border-radius: 40px;
-            font-size: 16px;
-            color: #ffeba7;
-            padding: 10px 10px 10px 10px;
-        }
-
-        input:hover {
-            border-color: #ffeba7;
-        }
-    </style>
+    <link rel="stylesheet" href="../Styles/AdminPageStyles.css">
 </head>
 <body>
     <header>
@@ -103,13 +51,24 @@
         </nav>
     </header>
     <div id="container">
+        <div id="heading">Diese Seite ist nur für Administratoren! Wenn Sie keine Administratorrechte haben, funktionieren jegliche Funktionen nicht.</div>
         <div id="wrapper">
-            <input type="text" placeholder="Benutzer">
-            <input type="text" placeholder="Geld">
-            <button id="sendButton">Zahlen</button>
+            <div class="section">
+                <input id="usernameInput1" class="textinputs" type="text" placeholder="Benutzer">
+                <input id="moneyInput" class="textinputs" type="text" placeholder="Geld">
+                <button onclick="editButton()" class="sendButton">Senden</button>
+            </div>
+            <div class="section">
+                <input id="usernameInput2" class="textinputs" type="text" placeholder="Benutzer">
+                <label for="deletebox">Löschen?</label>
+                <input id="deleteInput" name="deletebox" type="checkbox" placeholder="Geld">
+                <button onclick="userButton()" class="sendButton">Senden</button>
+            </div>
         </div>
+        <div id="outputUsers"></div>
     </div>
     <footer><a class="impressum" href="./Impressum.html">Impressum</a></footer>
     <script src="../Defaults/Default.js"></script>
+    <script src="../Logic/AdminPage.js"></script>
 </body>
 </html>

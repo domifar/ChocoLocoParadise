@@ -31,6 +31,8 @@ const multipliersMineGame = [
   [24.75] 
 ]
 const legitMinesfield = ["00", "01", "02", "03", "04", "10", "11", "12", "13", "14", "20", "21", "22", "23", "24", "30", "31", "32", "33", "34", "40", "41", "42", "43", "44"]
+const forbiddennames = ["none", "admin"]
+const adminUsers = ["dominik", "aldin", "ernest", "amar", "admin"]
 
 app.use(express.static('public'))
 app.use(express.json())
@@ -77,8 +79,8 @@ app.get('/register/:username/:password', (req, res) => {
   fs.readFile('./public/Database/Users.txt', 'utf-8', (err, data) => {
     if(err) throw err
     data = JSON.parse(data)
-    const chosenUser = data.find(user => user.username == username)
-    if(chosenUser) {
+    const chosenUser = data.find(user => user.username.toLocaleLowerCase() == username.toLocaleLowerCase())
+    if(chosenUser || forbiddennames.includes(username.toLocaleLowerCase())) {
       returnMessage = 'alreadyExist'
     }else {
       req.session.username = username
@@ -178,11 +180,11 @@ app.get('/newminefield/:minescount/:bet', (req, res) => {
   }
 })
 
-app.get('/minefield', (req, res) => {
-  res.send(JSON.stringify({
-    board: req.session.minesBoard
-  }))
-})
+// app.get('/minefield', (req, res) => {
+//   res.send(JSON.stringify({
+//     board: req.session.minesBoard
+//   }))
+// })
 
 app.get('/minetap/:tapid', async (req, res) => {
   if(req.session.minesBoard) {
@@ -384,6 +386,69 @@ app.get('/dice/:bet/:range/:side', async (req, res) => {
     wonmoney: money,
     bet: bet
   }))
+})
+
+app.get('/admin/:action/:value', (req, res) => {
+  if(adminUsers.includes(req.session.username)) {
+    let action = req.params.action
+    let value = req.params.value
+    if(action == 'get') {
+      if(value == 'none') {
+        fs.readFile('./public/Database/Users.txt', 'utf-8', (err, data) => {
+          if(err) throw err
+          res.send(JSON.stringify({
+            returnData: JSON.parse(data)
+          }))
+        })
+      }else if(value) {
+        fs.readFile('./public/Database/Users.txt', 'utf-8', (err, data) => {
+          if(err) throw err
+          const json = JSON.parse(data)
+          let userData = json.find(user => user.username == value)
+          if(!userData) {
+            userData = {
+              username: "none"
+            }
+          }
+          res.send(JSON.stringify({
+            returnData: userData
+          }))
+        })
+      }
+    }else if(action == "delete") {
+      if(value != "none") {
+        fs.readFile('./public/Database/Users.txt', 'utf8', function(err, data){
+          if (err) throw(err)
+          data = JSON.parse(data)
+          data = data.filter(user => user.username != value)
+          fs.writeFile('./public/Database/Users.txt', JSON.stringify(data), 'utf8', function(err){
+            if (err) throw(err)
+          })
+        })
+      }
+      res.send(JSON.stringify({
+        returnData: "finish"
+      }))
+    }else if(action = "money") {
+      let newMoney
+      const updateData = value.split(',')
+      fs.readFile('./public/Database/Users.txt', 'utf-8', (err, data) => {
+        if(err) throw err
+        const json = JSON.parse(data)
+        let userData = json.find(user => user.username == updateData[0])
+        if(userData) {
+          newMoney = updateMoney(updateData[0], parseFloat(updateData[1]))
+        }
+        res.send(JSON.stringify({
+          returnData: newMoney
+        }))
+      })
+    }
+  }else {
+    res.send(JSON.stringify({
+      returnData: "completeFail"
+    }))
+  }
 })
 
 app.use((req, res) => {
