@@ -1,4 +1,4 @@
-const url = 'http://localhost:3000'
+const url = 'http://https://chocolocoparadise.onrender.com'
 
 fetch(url + '/user')
   .then(response => response.json())

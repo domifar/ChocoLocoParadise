@@ -1,4 +1,4 @@
-const url = 'http://localhost:3000'
+const url = 'https://chocolocoparadise.onrender.com'
 
 const getUserData = () => {
   fetch(url + '/user')
