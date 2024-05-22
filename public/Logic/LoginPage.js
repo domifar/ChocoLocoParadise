@@ -1,4 +1,6 @@
-const url = 'https://chocolocoparadise.onrender.com'
+// const url = 'https://chocolocoparadise.onrender.com'
+const url = 'http://localhost:3000'
+
 let registerMessage
 let loginMessage
 let togglePasswordInput = true
