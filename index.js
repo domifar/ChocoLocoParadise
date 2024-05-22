@@ -142,7 +142,7 @@ app.get('/newminefield/:minescount/:bet', (req, res) => {
     req.session.minesBoard = undefined
     let bet = checkBet(req.params.bet, req.session.money)
     const minescount = checkMinesCount(req.params.minescount)
-    if(req.session.money < 1) {
+    if(req.session.money <= 0) {
       bet = -1
     }
 

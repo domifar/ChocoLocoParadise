@@ -101,7 +101,7 @@ const cashOut = () => {
   fetch(url + '/minescashout')
   .then((response) => response.json())
   .then((data) => {
-    print('gameMessageSuccess', data.multiplyer + 'x | ' + data.wonmoney + '<img style="width:2.2vh; height:2.2vh;" src="../assets/Coin.png" alt="Coin">')
+    print('gameMessageSuccess', data.multiplyer + 'x | ' + data.wonmoney.toFixed(2) + '<img style="width:2.2vh; height:2.2vh;" src="../assets/Coin.png" alt="Coin">')
     getUserData()
     startButton.innerHTML = 'Spiel starten'
     CurrentPayout.style.visibility = 'hidden'
