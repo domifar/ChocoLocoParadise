@@ -10,21 +10,25 @@ const newUser = (event) => {
   registerMessage = document.getElementById('registerMessage')
   let name = document.getElementById('nameInputRegister')
   let password = document.getElementById('passwordInputRegister')
-  if(name.value == "" || password.value == "") {
-    showMessage('registerMessage', '<i class="uil uil-times"></i>Nicht alle Felder ausgefüllt!', 'loginFail')
+  if(name.value.length > 25 && password.value.length > 25) {
+    print()
+  }else {
+    if(name.value == "" || password.value == "") {
+      showMessage('Zu langer Name oder zu langes Passwort!', 'loginFail')
+    }
+    else {
+      fetch(url + '/register/' + name.value + '/' + password.value)
+      .then(response => response.json())
+      .then(data => {
+        if(data.message == 'success') {
+          showMessage('registerMessage', '<i class="checkmark uil uil-check"></i>Sie sind jetzt registriert<br>Benutzer ' + name.value + ' angemeldet', 'loginSuccess')
+          location.href = '../index.html'
+        }else if (data.message == 'alreadyExist') {
+          showMessage('registerMessage', '<i class="uil uil-times"></i>Dieser Bnutzername existiert schon!', 'loginFail')
+        }
+      })
+    }	
   }
-  else {
-    fetch(url + '/register/' + name.value + '/' + password.value)
-    .then(response => response.json())
-    .then(data => {
-      if(data.message == 'success') {
-        showMessage('registerMessage', '<i class="checkmark uil uil-check"></i>Sie sind jetzt registriert<br>Benutzer ' + name.value + ' angemeldet', 'loginSuccess')
-        location.href = '../index.html'
-      }else if (data.message == 'alreadyExist') {
-        showMessage('registerMessage', '<i class="uil uil-times"></i>Dieser Bnutzername existiert schon!', 'loginFail')
-      }
-    })
-  }	
 }
 
 const knownUser = (event) => {

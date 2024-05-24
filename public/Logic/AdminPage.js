@@ -34,3 +34,15 @@ const editButton = () => {
         getUserData()
     })
 }
+
+const checkIfAdmin = () => {
+    fetch(url + "/checkIfAdmin")
+    .then(response => response.json())
+    .then(data => {
+        if(!data.returnMessage) {
+            window.location.href = "NoAdminPage.html"
+        }
+    })
+}
+
+checkIfAdmin()

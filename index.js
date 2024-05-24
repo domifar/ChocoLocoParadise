@@ -185,6 +185,24 @@ app.get('/newminefield/:minescount/:bet', (req, res) => {
 //     board: req.session.minesBoard
 //   }))
 // })
+//FRONTEND
+// const getBoard = () => {
+//   fetch(url + '/minefield')
+//   .then((response) => response.json())
+//   .then((data) => {
+//     spielfeld = data.board
+//     var html = '<table>'
+//     for (var i = 0; i < 5; i++) {
+//         html += '<tr>'
+//         for (var j = 0; j < 5; j++) {
+//             html += '<td>' + spielfeld[i][j] + '</td>'
+//         }
+//         html += '</tr>'
+//     }
+//     html += '</table>'
+//     document.getElementById('showboard').innerHTML = html
+//   })
+// }
 
 app.get('/minetap/:tapid', async (req, res) => {
   if(req.session.minesBoard) {
@@ -449,6 +467,19 @@ app.get('/admin/:action/:value', (req, res) => {
       returnData: "completeFail"
     }))
   }
+})
+
+app.get("/checkIfAdmin", (req, res) => {
+  if(adminUsers.includes(req.session.username)) {
+    returnMessage = true
+  }
+  else {
+    returnMessage = false
+  }
+
+  res.send(JSON.stringify({
+    returnMessage: returnMessage
+  }))
 })
 
 app.use((req, res) => {

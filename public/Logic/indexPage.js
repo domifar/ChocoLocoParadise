@@ -55,4 +55,20 @@ function showSlides() {
   setTimeout(showSlides, 5000)
 }
 
-showSlides();
+const checkIfAdmin = () => {
+  fetch(url + "/checkIfAdmin")
+  .then(response => response.json())
+  .then(data => {
+      if(!data.returnMessage) {
+        window.location.href = "./Sites/NoAdminPage.html"
+      }else {
+        window.location.href = "./Sites/AdminPage.html"
+      }
+  })
+}
+
+const hrefSend = () => {
+  window.location.href = "./Sites/Impressum.html"
+}
+
+showSlides()

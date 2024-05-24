@@ -113,25 +113,6 @@ const cashOut = () => {
   })
 }
 
-//kommt noch weg
-const getBoard = () => {
-  fetch(url + '/minefield')
-  .then((response) => response.json())
-  .then((data) => {
-    spielfeld = data.board
-    var html = '<table>'
-    for (var i = 0; i < 5; i++) {
-        html += '<tr>'
-        for (var j = 0; j < 5; j++) {
-            html += '<td>' + spielfeld[i][j] + '</td>'
-        }
-        html += '</tr>'
-    }
-    html += '</table>'
-    document.getElementById('showboard').innerHTML = html
-  })
-}
-
 const print = (status, message) => {
   gameMessage.classList = status
   gameMessage.innerHTML = message

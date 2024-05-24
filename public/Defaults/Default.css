@@ -1,5 +1,6 @@
 body {
     background-image: url('../assets/mainBackgroundLoginPage.jpg');
+    background-size: cover;
     font-family: Arial, sans-serif;
     margin: 0;
   }
@@ -93,6 +94,7 @@ header {
 }
 
 #usernameField {
+    margin-left: 1vh;
     font-size: 2.8vh;
     max-width: 70%;
 }
@@ -105,11 +107,9 @@ header {
     border-radius: 1vh;
     box-shadow: 0;
     transition: box-shadow 0.3s ease-in-out;
-    white-space: nowrap;
 }
 
 .linkLogin:hover {
-    overflow-x: auto;
     box-shadow: 0 1vh 1vh -1.2vh white;
 }
 
@@ -120,6 +120,7 @@ header {
 }
 
 .impressum {
+    background: none;
     color: #ffeba7;
     text-decoration: none;
 }
