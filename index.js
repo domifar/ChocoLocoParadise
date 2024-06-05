@@ -280,7 +280,6 @@ app.get('/resetMinesBoard', (req, res) => {
 
 app.get('/wheelspin', async (req, res) => {
   let returnMessage
-
   if(req.session.username) {
     const today = new Date(new Date().toUTCString())
     today.setHours(0, 0, 0, 0)
@@ -288,45 +287,8 @@ app.get('/wheelspin', async (req, res) => {
     if(req.session.lastreward == "null" || lastreward.getTime() < today.getTime()) {
       req.session.lastreward = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
       await updateLastReward(req.session.username, req.session.lastreward)
-      const segment = Math.floor(Math.random() * 8) + 1
-      const segmentDegree = (Math.floor(Math.random() * 35) + 1) + 5
-      switch (segment) {
-        case 1:
-          returnMessage = '' + (segmentDegree + 0)
-          req.session.money = await updateMoney(req.session.username, 1)
-          break
-        case 2:
-          returnMessage = '' + (segmentDegree + 45)
-          req.session.money = await updateMoney(req.session.username, 10)
-          break
-        case 3:
-          returnMessage = '' + (segmentDegree + 90)
-          req.session.money = await updateMoney(req.session.username, 100)
-          break
-        case 4:
-          returnMessage = '' + (segmentDegree + 135)
-          req.session.money = await updateMoney(req.session.username, 1000)
-          break
-        case 5:
-          returnMessage = '' + (segmentDegree + 180)
-          req.session.money = await updateMoney(req.session.username, 1)
-          break
-        case 6:
-          returnMessage = '' + (segmentDegree + 225)
-          req.session.money = await updateMoney(req.session.username, 10)
-          break
-        case 7:
-          returnMessage = '' + (segmentDegree + 270)
-          req.session.money = await updateMoney(req.session.username, 100)
-          break
-        case 8:
-          returnMessage = '' + (segmentDegree + 315)
-          req.session.money = await updateMoney(req.session.username, 1000)
-          break
-        default:
-          returnMessage = 'servus'
-          break
-      }
+      console.log("sevus")
+      updateMoney(req.session.username, 100)
     }else {
       returnMessage == 'notReady'
     }

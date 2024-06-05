@@ -97,6 +97,7 @@ header {
     margin-left: 1vh;
     font-size: 2.8vh;
     max-width: 70%;
+    overflow: hidden;
 }
 
 .linkLogin  {

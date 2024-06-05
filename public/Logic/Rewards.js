@@ -1,43 +1,6 @@
-const resetWheel = () => {
-    theWheel.stopAnimation(false)
-    theWheel.rotationAngle = 0
-    theWheel.draw()
-}
-
-const alertPrize = (indicatedSegment) => {
-    getUserData()
-    showMessage('rewardSuccess', indicatedSegment.text + '<img style="width:4vh; height:4vh;" src="../assets/Coin.png" alt="Coin"> zu Ihrem Kontostand hinzugefügt!')
-    wheelSpinning = false
-}
-
 const getButton = document.getElementById('getButton')
 
 const rewardMessage = document.getElementById('rewardMessage')
-let wheelSpinning = false
-let theWheel = new Winwheel({
-    'numSegments'  : 8,
-    'outerRadius'  : 212,
-    'textFontSize' : 28,
-    'segments'     :
-    [
-       {'fillStyle' : '#ffffff', 'text' : '1'},
-       {'fillStyle' : '#ffeba7', 'text' : '10'},
-       {'fillStyle' : '#ffffff', 'text' : '100'},
-       {'fillStyle' : '#ffeba7', 'text' : '1000'},
-       {'fillStyle' : '#ffffff', 'text' : '1'},
-       {'fillStyle' : '#ffeba7', 'text' : '10'},
-       {'fillStyle' : '#ffffff', 'text' : '100'},
-       {'fillStyle' : '#ffeba7', 'text' : '1000'}
-    ],
-    'animation' :
-    {
-        'type'     : 'spinToStop',
-        'duration' : 5,
-        'spins'    : 8,
-        'stopAngle': 85,
-        'callbackFinished' : alertPrize
-    }
-})
 
 const startSpin = () => {
     if (!wheelSpinning) {
@@ -46,10 +9,9 @@ const startSpin = () => {
         .then(response => response.json())
         .then(data => {
             if(data.message != 'nooneLoggedIn' && data.message != 'notReady') {
-                theWheel.animation.stopAngle = parseInt(data.message)
-                theWheel.startAnimation()
-                wheelSpinning = true
                 setInterval(updateCountdown, 1000)
+                showMessage('rewardSuccess', '100 <img style="width:4vh; height:4vh;" src="../assets/Coin.png" alt="Coin"> zu Ihrem Kontostand hinzugefügt!')
+                getUserData()
             }
         })
     }

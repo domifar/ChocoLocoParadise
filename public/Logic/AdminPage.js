@@ -9,6 +9,7 @@ const userButton = () => {
         .then(response => response.json())
         .then(data => {
             console.log(data)
+            getUserData()
         })
     }else {
         fetch(url + "/admin/get/" + username)
@@ -20,6 +21,7 @@ const userButton = () => {
                 data.returnData.map(user => outputData += "Username: " + outputData.username + "Money: " + outputData.money + "Last Reward: " + outputData.lastreward + "\n")
             }
             document.getElementById("outputUsers").innerHTML = outputData
+            getUserData()
         })
     }
 }

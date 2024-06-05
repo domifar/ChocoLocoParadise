@@ -1,5 +1,5 @@
-const url = 'https://chocolocoparadise.onrender.com'
-// const url = 'http://localhost:3000'
+// const url = 'https://chocolocoparadise.onrender.com'
+const url = 'http://localhost:3000'
 
 let registerMessage
 let loginMessage
@@ -10,9 +10,11 @@ const newUser = (event) => {
   registerMessage = document.getElementById('registerMessage')
   let name = document.getElementById('nameInputRegister')
   let password = document.getElementById('passwordInputRegister')
-  if(name.value.length > 25 && password.value.length > 25) {
-    print()
-  }else {
+  if(name.value.length > 25) {
+    showMessage('registerMessage', 'Zu langer Benutzername!', 'loginFail')
+  }else if(password.value.length > 25) {
+    showMessage('registerMessage', 'Zu langes Passwort!', 'loginFail')
+  } else {
     if(name.value == "" || password.value == "") {
       showMessage('Zu langer Name oder zu langes Passwort!', 'loginFail')
     }
@@ -24,7 +26,7 @@ const newUser = (event) => {
           showMessage('registerMessage', '<i class="checkmark uil uil-check"></i>Sie sind jetzt registriert<br>Benutzer ' + name.value + ' angemeldet', 'loginSuccess')
           location.href = '../index.html'
         }else if (data.message == 'alreadyExist') {
-          showMessage('registerMessage', '<i class="uil uil-times"></i>Dieser Bnutzername existiert schon!', 'loginFail')
+          showMessage('registerMessage', '<i class="uil uil-times"></i>Dieser Benutzername existiert schon!', 'loginFail')
         }
       })
     }	
