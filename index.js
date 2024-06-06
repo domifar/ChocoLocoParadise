@@ -265,6 +265,7 @@ app.get('/minescashout', async (req, res) => {
       res.status(500).send('Ein Fehler ist aufgetreten')
     }
   }else {
+    req.session.minesBoard = undefined
     res.send(JSON.stringify({
       wonmoney: 0,
       multiplyer: 0
@@ -332,7 +333,6 @@ app.get('/dice/:bet/:range/:side', async (req, res) => {
   if(req.session.username) {
     bet = checkBet(bet, req.session.money)
     range = checkDiceRange(range)
-
     do {
       number = Math.floor(Math.random() * 100) + 1
     }while(number == range)
@@ -523,7 +523,7 @@ const checkBet = (value, userMoney) => {
 }
 
 const checkDiceRange = (range) => {
-  if (range == '') {
+  if (range === '') {
     return 50
   } else {
     let num = parseFloat(range)

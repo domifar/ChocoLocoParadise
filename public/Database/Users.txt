@@ -1,1 +1,1 @@
-[{"username":"servus","password":"asdf","money":"125.00","lastreward":"2024-5-17"},{"username":"admin","password":"beefei123","money":"100368.00","lastreward":"2024-5-21"},{"username":"asdf","password":"asdf","money":"600.00","lastreward":"2024-6-6"}]
+[{"username":"servus","password":"asdf","money":"125.00","lastreward":"2024-5-17"},{"username":"admin","password":"beefei123","money":"100368.00","lastreward":"2024-5-21"},{"username":"asdf","password":"asdf","money":"201.53","lastreward":"2024-6-6"}]

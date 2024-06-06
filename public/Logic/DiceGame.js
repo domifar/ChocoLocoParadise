@@ -20,6 +20,7 @@ const updateBar = () => {
     inputRange = 99
     print('gameMessageFail', 'Maximale Range 99!')
   } else if(inputRange < 1) {
+    console.log("hallo")
     inputRange = 1
     print('gameMessageFail', 'Minimale Range 1!')
   } else {

@@ -108,7 +108,6 @@ const cashOut = () => {
     buttonToggle = !buttonToggle
     failedTimes = 0
     overlay.style.opacity = 0
-    console.log("1nd cashei: " + data.board)
     printFullBoard(data.board)
   })
 }
@@ -119,13 +118,10 @@ const print = (status, message) => {
 }
 
 const printFullBoard = (board) => {
-  console.log("2nd" + board)
   var cells = document.getElementsByClassName('cell')
-  console.log(cells[0])
   let k = 0
   for (let i = 0; i < 5; i++) {
     for (let j = 0; j < 5; j++) {
-      console.log(cells[k].src)
       if(cells[k].src == url +  '/assets/closedMine.png') {
         let source
         if(board[i][j] == 'mine') {
