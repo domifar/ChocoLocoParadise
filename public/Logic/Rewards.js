@@ -43,7 +43,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }else if(data.message == 'notReady') {
             setInterval(updateCountdown, 1000)
         }else if(data.message == 'Ready') {
-            getButton.innerHTML = 'Drehen'
+            getButton.innerHTML = 'Abholen'
         }
     })
 })
