@@ -2,6 +2,7 @@ const express = require('express')
 const session = require('express-session')
 const path = require('path')
 const fs = require('node:fs')
+const rateLimit = require('express-rate-limit');
 const app = express()
 const port = process.env.PORT || 3000
 const multipliersMineGame = [
@@ -42,6 +43,15 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false }
 }))
+const loginLimiter = rateLimit({
+  windowMs: 60 * 60 * 1000,
+  max: 2,
+  handler: function (req, res) {
+    res.status(429).json({
+      message: "Zu viele Registrierungen von dem Computer!"
+    });
+  }
+})
 
 app.get('/login/:username/:password', (req, res) => {
   let returnMessage
@@ -71,7 +81,7 @@ app.get('/login/:username/:password', (req, res) => {
   })
 })
 
-app.get('/register/:username/:password', (req, res) => {
+app.get('/register/:username/:password', loginLimiter, (req, res) => {
   let returnMessage
   const username = req.params.username
   const password = req.params.password

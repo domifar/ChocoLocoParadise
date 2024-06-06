@@ -27,6 +27,8 @@ const newUser = (event) => {
           location.href = '../index.html'
         }else if (data.message == 'alreadyExist') {
           showMessage('registerMessage', '<i class="uil uil-times"></i>Dieser Benutzername existiert schon!', 'loginFail')
+        }else {
+          showMessage('registerMessage', data.message, 'loginFail')
         }
       })
     }	
