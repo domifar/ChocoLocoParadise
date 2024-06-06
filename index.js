@@ -287,10 +287,9 @@ app.get('/wheelspin', async (req, res) => {
     if(req.session.lastreward == "null" || lastreward.getTime() < today.getTime()) {
       req.session.lastreward = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
       await updateLastReward(req.session.username, req.session.lastreward)
-      console.log("sevus")
-      updateMoney(req.session.username, 100)
+      req.session.money = await updateMoney(req.session.username, 100)
     }else {
-      returnMessage == 'notReady'
+      returnMessage = 'notReady'
     }
   }else {
     returnMessage = 'nooneLoggedIn'

@@ -34,6 +34,10 @@
 }
 
 #getButton{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5vh;
     width: auto;
     height: 5vh;
     background: #ffeba7;
