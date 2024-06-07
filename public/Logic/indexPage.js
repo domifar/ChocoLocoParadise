@@ -5,12 +5,12 @@ fetch(url + '/user')
   .then(response => response.json())
   .then((data) => {
     if(data.text == 'fail') {
-        document.getElementById('usernameField').innerHTML = "Anmelden"
-        document.getElementById('moneyField').innerHTML = ""
+      document.getElementById('usernameField').innerHTML = "Anmelden"
+      document.getElementById('moneyField').innerHTML = ""
     }
     else{
-        document.getElementById('usernameField').innerHTML = data.username
-        document.getElementById('moneyField').innerHTML = data.money + ' <img height="40vh" width="40vh" id="coinImage" class="coinImage" src="./assets/Coin.png" alt="Coin">'
+      document.getElementById('usernameField').innerHTML = data.username
+      document.getElementById('moneyField').innerHTML = data.money + ' <img height="40vh" width="40vh" id="coinImage" class="coinImage" src="./assets/Coin.png" alt="Coin">'
     }
   })
 

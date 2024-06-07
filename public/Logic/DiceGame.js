@@ -19,11 +19,13 @@ const updateBar = () => {
   if(inputRange > 99) {
     inputRange = 99
     print('gameMessageFail', 'Maximale Range 99!')
+    document.getElementById('playButton').disabled = true
   } else if(inputRange < 1) {
     inputRange = 1
     print('gameMessageFail', 'Minimale Range 1!')
+    document.getElementById('playButton').disabled = true
   } else {
-    print('', '');
+    document.getElementById('playButton').disabled = false
   }
 
   if (mode == 'over') {
