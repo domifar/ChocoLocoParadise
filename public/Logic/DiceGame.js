@@ -14,14 +14,14 @@ const print = (status, message) => {
 }
 
 const updateBar = () => {
-  let inputRange = document.getElementById('inputRange').value
+  let inputRange = document.getElementById('inputRange')
   
   if(inputRange > 99) {
-    inputRange = 99
+    inputRange.value = 99
     print('gameMessageFail', 'Maximale Range 99!')
   } else if(inputRange < 1) {
     console.log("hallo")
-    inputRange = 1
+    inputRange.value = 1
     print('gameMessageFail', 'Minimale Range 1!')
   } else {
     print('', '');
@@ -48,8 +48,10 @@ const playGame = () => {
   fetch(url + '/dice/' + document.getElementById('bet').value + '/' + inputRange + '/' + mode)
   .then(response => response.json())
   .then(data => {
-    console.log(data)
-    if(data.message == 'fail'||data.message == 'success') {
+    if (data.bet == 0) {
+      print('gameMessageFail', 'Kein Geld mehr zum Spielen!'); 
+      playButton.disabled = true
+    }else if(data.message == 'fail' || data.message == 'success') {
       rotation += 360
       dice = parseInt(data.number)
       document.getElementById('bet').value = data.bet
