@@ -14,14 +14,13 @@ const print = (status, message) => {
 }
 
 const updateBar = () => {
-  let inputRange = document.getElementById('inputRange')
+  let inputRange = document.getElementById('inputRange').value
   
   if(inputRange > 99) {
-    inputRange.value = 99
+    inputRange = 99
     print('gameMessageFail', 'Maximale Range 99!')
   } else if(inputRange < 1) {
-    console.log("hallo")
-    inputRange.value = 1
+    inputRange = 1
     print('gameMessageFail', 'Minimale Range 1!')
   } else {
     print('', '');
