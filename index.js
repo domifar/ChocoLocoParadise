@@ -48,7 +48,7 @@ app.use(session({
 const clearIPList = schedule.scheduleJob('10 * * * *', () => {
   console.log(registerIPList)
   registerIPList = []
-  console.log('Cleared');
+  console.log('Cleared IP list');
 })
 
 app.get('/login/:username/:password', (req, res) => {
@@ -81,7 +81,7 @@ app.get('/login/:username/:password', (req, res) => {
 
 app.get('/register/:username/:password', (req, res) => {
   let returnMessage
-  const IPreq = req.headers['x-forwarded-for'] || req.connection.remoteAddress
+  const IPreq = req.headers['x-forwarded-for'].split(',')[0]
   if(!registerIPList.includes(IPreq)) {
     registerIPList.push(IPreq)
     console.log("new: " + IPreq)
