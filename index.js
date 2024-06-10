@@ -81,7 +81,7 @@ app.get('/login/:username/:password', (req, res) => {
 
 app.get('/register/:username/:password', (req, res) => {
   let returnMessage
-  const IPreq = req.ip
+  const IPreq = req.headers['x-forwarded-for'] || req.connection.remoteAddress
   if(!registerIPList.includes(IPreq)) {
     registerIPList.push(IPreq)
     console.log("new: " + IPreq)
