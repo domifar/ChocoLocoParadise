@@ -1,5 +1,5 @@
-const url = 'https://chocolocoparadise.onrender.com'
-// const url = 'http://localhost:3000'
+// const url = 'https://chocolocoparadise.onrender.com'
+const url = 'http://localhost:3000'
 
 let registerMessage
 let loginMessage
@@ -63,10 +63,18 @@ const showMessage = (outputElement, message, messageStatus) => {
   if(outputElement == 'registerMessage') {
     registerMessage.classList = `${messageStatus}`
     registerMessage.innerHTML = `${message}`
+    setTimeout(() => {
+      registerMessage.classList = ''
+      registerMessage.innerHTML = ''
+  }, 5000);
   }
   else {
     loginMessage.classList = `${messageStatus}`
     loginMessage.innerHTML = `${message}`
+    setTimeout(() => {
+      loginMessage.classList = ''
+      loginMessage.innerHTML = ''
+  }, 5000);
   }
 }
 

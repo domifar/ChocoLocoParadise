@@ -8,14 +8,12 @@ const userButton = () => {
         fetch(url + "/admin/delete/" + username)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             getUserData()
         })
     }else {
         fetch(url + "/admin/get/" + username)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             let outputData
             if(username == "none") {
                 data.returnData.map(user => outputData += "Username: " + outputData.username + "Money: " + outputData.money + "Last Reward: " + outputData.lastreward + "\n")
@@ -32,7 +30,6 @@ const editButton = () => {
     fetch(url + "/admin/money/" + username + "," + money)
     .then(response => response.json())
     .then(data => {
-        console.log(data)
         getUserData()
     })
 }

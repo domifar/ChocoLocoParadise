@@ -59,23 +59,34 @@
     transition: box-shadow 0.3s ease-in-out;
 }
 
-#spinGame {
+#wrapper {
+    margin-top: 2vh;
+    margin-bottom: 20vh;
+}
+
+#dailyReward {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
 }
 
-#inputs {
-    margin: 10vh;
+#rewardButton {
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-#wheel {
+#amountReward {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    color: white;
+    font-size: 20px;
+    text-shadow: 0 0 2.5vh #ffeba7;
+}
+
+#title {
+    margin: 12vh;
 }
 
 .pointer {
@@ -91,3 +102,8 @@
 #adminpage a {
     color: transparent;
 }
+
+#impressum { 
+    background-color: #38170e;
+    color: #ffeba7;
+  }

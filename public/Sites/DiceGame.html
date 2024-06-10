@@ -61,16 +61,22 @@
             </div>
         </div>
         <div id="inputs">
+            <div id="inputtext">Einsatz:</div>
             <input value="10" step="0.01" type="number" id="bet">
+            <div id="inputtext">Range:</div>
             <input value="50" type="number" id="inputRange" min="1" max="99" oninput="updateBar()">
-            <button class="diceButton" id="modeButton" onclick="toggleMode()">Darüber</button>
+            <button id="modeButton" class="diceButton" onclick="toggleMode()">Darüber</button>
             <button id="playButton" class="diceButton" onclick="playGame()">Spielen</button>
+        </div>
+        <div id="minMaxBet">
+            <button class="diceButton" onclick="setMinBet()">Min Bet</button>
+            <button class="diceButton" onclick="setMaxBet()">Max Bet</button>
         </div>
         <div id="gameMessage"></div>
     </div>
     
 
-    <footer><a class="impressum" href="./Impressum.html">Impressum</a></footer>
+    <footer><button id="impressum" onclick="hrefSend()">Impressum</button></footer>
     <script src="../Defaults/Default.js"></script>
     <script src="../Logic/DiceGame.js"></script>
 </body>

@@ -1,5 +1,5 @@
-const url = 'https://chocolocoparadise.onrender.com'
-// const url = 'http://localhost:3000'
+// const url = 'https://chocolocoparadise.onrender.com'
+const url = 'http://localhost:3000'
 
 fetch(url + '/user')
   .then(response => response.json())
@@ -38,7 +38,6 @@ container.addEventListener('mouseup', () => {
 
 container.addEventListener('mousemove', (e) => {
   if(!isDown) return
-  console.log("wiemachma")
   e.preventDefault()
   const x = e.pageX - container.offsetLeft
   const walk = (x - startX)

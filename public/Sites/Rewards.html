@@ -50,16 +50,19 @@
             </div>
         </nav>
     </header>
-    <h1>Tägliche Belohnung</h1>
-    <div id="spinGame">
-        <div id="inputs">
-            <button id="getButton" onclick="startSpin()"></button>
+    <h1 id="title">Tägliche Belohnung</h1>
+    <div id="wrapper">
+        <div id="amountReward">1000 <img style="width:4vh; height:4vh;" src="../assets/Coin.png" alt="Coin"></div>
+        <div id="dailyReward">
+            <div id="rewardButton">
+                <button id="getButton" onclick="startSpin()"></button>
+            </div>
+        </div>
+        <div id="messages">
+            <div id="rewardMessage"></div>
         </div>
     </div>
-    <div id="messages">
-        <div id="rewardMessage"></div>
-    </div>
-    <footer><a class="impressum" href="./Impressum.html">Impressum</a></footer>
+    <footer><button id="impressum" onclick="hrefSend()">Impressum</button></footer>
     <script src="../Defaults/Default.js"></script>
     <script src="../Logic/Rewards.js"></script>
 </body>

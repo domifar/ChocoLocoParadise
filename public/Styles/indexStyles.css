@@ -50,9 +50,10 @@
   width: 30vh;
   height: 40vh;
   border-radius: 2vh;
-  border: 2px solid #38170e; 
-  background-color: gray;
+  border: 2px solid #38170e;
   transition: box-shadow 0.3s ease-in-out;
+  background-image: url("../assets/comingSoon.png");
+  background-size: contain;
 }
 
 .gamecard:hover {
@@ -74,6 +75,10 @@
 #diceCard {
   background-image: url('../assets/DiceGame.png');
   background-size: cover;
+}
+
+.impressum {
+  background-color: #38170e;
 }
 
 ::-webkit-scrollbar {

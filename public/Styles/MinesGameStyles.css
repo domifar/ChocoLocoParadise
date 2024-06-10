@@ -8,6 +8,7 @@ input {
     font-size: 16px;
     color: #ffeba7;
     padding: 10px 10px 10px 10px;
+    background-color: #38170e;
 }
 
 input:hover {
@@ -130,8 +131,8 @@ input:hover {
     font-size: 16px;
 }
 
-#startButton{
-    width: 20%;
+.minesButton{
+    width: auto;
     height: 45px;
     background: #ffeba7;
     border: none;
@@ -145,12 +146,24 @@ input:hover {
     transition: box-shadow 0.3s ease-in-out;
 }
 
-#startButton:hover {
+.minesButton:hover {
     color: #ffeba7;
     background-color: black;
     box-shadow: 0 0 25px #ffeba7;
     transition: box-shadow 0.3s ease-in-out;
 }
+
+#minMaxBet {
+    display: flex;
+    margin-top: 1%;
+    margin-right: 24%;
+    gap: 1vh;
+}
+
+#impressum { 
+    background-color: #38170e;
+    color: #ffeba7;
+  }
 
 .gameMessageNormal {
     width: 40%;

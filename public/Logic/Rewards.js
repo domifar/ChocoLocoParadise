@@ -2,12 +2,12 @@ const getButton = document.getElementById('getButton')
 const rewardMessage = document.getElementById('rewardMessage')
 
 const startSpin = () => {
-    fetch(url + '/wheelspin')
+    fetch(url + '/dailyReward')
     .then(response => response.json())
     .then(data => {
         if(data.message != 'nooneLoggedIn' && data.message != 'notReady') {
             setInterval(updateCountdown, 1000)
-            showMessage('rewardSuccess', '100 <img style="width:4vh; height:4vh;" src="../assets/Coin.png" alt="Coin"> zu Ihrem Kontostand hinzugefügt!')
+            showMessage('rewardSuccess', '1000 <img style="width:4vh; height:4vh;" src="../assets/Coin.png" alt="Coin"> zu Ihrem Kontostand hinzugefügt!')
             getUserData()
         }
     })
@@ -16,6 +16,10 @@ const startSpin = () => {
 const showMessage = (type, message) => {
     rewardMessage.classList = type
     rewardMessage.innerHTML = message
+    setTimeout(() => {
+        rewardMessage.classList = ''
+        rewardMessage.innerHTML = ''
+    }, 5000)
 }
 
 const updateCountdown = () => {

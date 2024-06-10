@@ -65,14 +65,18 @@
             </div>
         </div>
         <div id="inputs">
-            <div id="inputtext">Einsatz</div>
+            <div id="inputtext">Einsatz:</div>
             <input value="10" id="moneyInput" type="text" placeholder="Einsatz">
-            <div id="inputtext">Anzahl der Chilis</div>
+            <div id="inputtext">Anzahl der Chilis:</div>
             <input value="1" id="minecountInput" type="text" placeholder="Chilis">
-            <button onclick="mainButton()" id="startButton">Spiel starten</button>
+            <button id="startButton" class="minesButton" onclick="mainButton()">Spiel starten</button>
+        </div>
+        <div id="minMaxBet">
+            <button id="minBetButton" class="minesButton" onclick="setMinBet()">Min Bet</button>
+            <button id="maxBetButton" class="minesButton" onclick="setMaxBet()">Max Bet</button>
         </div>
     </div>
-    <footer><a class="impressum" href="./Impressum.html">Impressum</a></footer>
+    <footer><button id="impressum" onclick="hrefSend()">Impressum</button></footer>
     <script src="../Defaults/Default.js"></script>
     <script src="../Logic/MinesGame.js"></script>
 </body>

@@ -1,5 +1,5 @@
-const url = 'https://chocolocoparadise.onrender.com'
-// const url = 'http://localhost:3000'
+// const url = 'https://chocolocoparadise.onrender.com'
+const url = 'http://localhost:3000'
 
 const getUserData = () => {
   fetch(url + '/user')
@@ -17,3 +17,7 @@ const getUserData = () => {
 }
 
 getUserData()
+
+const hrefSend = () => {
+  window.location.href = "./Impressum.html"
+}

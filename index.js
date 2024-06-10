@@ -2,7 +2,7 @@ const express = require('express')
 const session = require('express-session')
 const path = require('path')
 const fs = require('node:fs')
-const rateLimit = require('express-rate-limit');
+const schedule = require('node-schedule')
 const app = express()
 const port = process.env.PORT || 3000
 const multipliersMineGame = [
@@ -34,6 +34,7 @@ const multipliersMineGame = [
 const legitMinesfield = ["00", "01", "02", "03", "04", "10", "11", "12", "13", "14", "20", "21", "22", "23", "24", "30", "31", "32", "33", "34", "40", "41", "42", "43", "44"]
 const forbiddennames = ["none", "admin"]
 const adminUsers = ["admin"]
+let registerIPList = []
 
 app.use(express.static('public'))
 app.use(express.json())
@@ -43,14 +44,11 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: false }
 }))
-const loginLimiter = rateLimit({
-  windowMs: 60 * 60 * 1000,
-  max: 2,
-  handler: function (req, res) {
-    res.status(429).json({
-      message: "Zu viele Registrierungen von dem Computer!"
-    });
-  }
+
+const clearIPList = schedule.scheduleJob('10 * * * *', () => {
+  console.log(registerIPList)
+  registerIPList = []
+  console.log('Cleared');
 })
 
 app.get('/login/:username/:password', (req, res) => {
@@ -81,38 +79,49 @@ app.get('/login/:username/:password', (req, res) => {
   })
 })
 
-app.get('/register/:username/:password', loginLimiter, (req, res) => {
+app.get('/register/:username/:password', (req, res) => {
   let returnMessage
-  const username = req.params.username
-  const password = req.params.password
+  const IPreq = req.ip
+  if(!registerIPList.includes(IPreq)) {
+    registerIPList.push(IPreq)
+    console.log("new: " + IPreq)
+    const username = req.params.username
+    const password = req.params.password
 
-  fs.readFile('./public/Database/Users.txt', 'utf-8', (err, data) => {
-    if(err) throw err
-    data = JSON.parse(data)
-    const chosenUser = data.find(user => user.username.toLocaleLowerCase() == username.toLocaleLowerCase())
-    if(chosenUser || forbiddennames.includes(username.toLocaleLowerCase())) {
-      returnMessage = 'alreadyExist'
-    }else {
-      req.session.username = username
-      req.session.money = "100"
-      req.session.lastreward = "null"
-      data.push({
-        username: username,
-        password: password,
-        money: "100",
-        lastreward: "null"
-      })
-      fs.writeFile('./public/Database/Users.txt', JSON.stringify(data), 'utf8', function(err){
-         if (err) throw err
-      })
-      returnMessage = 'success'
-    }
-    
+    fs.readFile('./public/Database/Users.txt', 'utf-8', (err, data) => {
+      if(err) throw err
+      data = JSON.parse(data)
+      const chosenUser = data.find(user => user.username.toLocaleLowerCase() == username.toLocaleLowerCase())
+      if(chosenUser || forbiddennames.includes(username.toLocaleLowerCase())) {
+        returnMessage = 'alreadyExist'
+      }else {
+        req.session.username = username
+        req.session.money = "100"
+        req.session.lastreward = "null"
+        data.push({
+          username: username,
+          password: password,
+          money: "100",
+          lastreward: "null"
+        })
+        fs.writeFile('./public/Database/Users.txt', JSON.stringify(data), 'utf8', function(err){
+          if (err) throw err
+        })
+        returnMessage = 'success'
+      }
+
+      res.send(JSON.stringify({
+        message: returnMessage
+      }))
+    })
+  }else {
+    console.log("already")
     res.send(JSON.stringify({
-      message: returnMessage
+      message: 'Zu viele Anmeldungen mit dieser IP!'
     }))
-  })
-})
+  }
+}) 
+
 
 app.get('/user', (req, res) => {
   if(req.session.username && req.session.money) {
@@ -289,7 +298,7 @@ app.get('/resetMinesBoard', (req, res) => {
   }
 })
 
-app.get('/wheelspin', async (req, res) => {
+app.get('/dailyReward', async (req, res) => {
   let returnMessage
   if(req.session.username) {
     const today = new Date(new Date().toUTCString())
@@ -298,7 +307,7 @@ app.get('/wheelspin', async (req, res) => {
     if(req.session.lastreward == "null" || lastreward.getTime() < today.getTime()) {
       req.session.lastreward = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
       await updateLastReward(req.session.username, req.session.lastreward)
-      req.session.money = await updateMoney(req.session.username, 100)
+      req.session.money = await updateMoney(req.session.username, 1000)
     }else {
       returnMessage = 'notReady'
     }
@@ -374,6 +383,12 @@ app.get('/dice/:bet/:range/:side', async (req, res) => {
     number: number,
     wonmoney: money,
     bet: bet
+  }))
+})
+
+app.get('/getmoney', (req, res) => {
+  res.send(JSON.stringify({
+    currentMoney: req.session.money
   }))
 })
 

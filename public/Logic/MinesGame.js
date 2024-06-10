@@ -2,11 +2,15 @@ const gameMessage = document.getElementById('gameMessage')
 const minecountInput = document.getElementById('minecountInput')
 const betInput = document.getElementById('moneyInput')
 const startButton = document.getElementById('startButton')
+const minBetButton = document.getElementById('minBetButton')
+const maxBetButton = document.getElementById('maxBetButton')
 const CurrentPayout = document.getElementById('CurrentPayout')
 const overlay = document.getElementById('keepOnGambling')
 let field = document.getElementById('field')
 let failedTimes = 0
 let buttonToggle = true
+let maxBet = 0
+const minBet = 1
 
 const handleClick = (event) => {
   var element = document.getElementById(event.target.id)
@@ -15,7 +19,6 @@ const handleClick = (event) => {
   .then((response) => response.json())
   .then((data) => {
     if(data.content == 'mine') {
-      console.log(data)
       element.classList.add('pulseMid')
       setTimeout(() => {
         element.classList.remove('pulseMid')
@@ -24,7 +27,6 @@ const handleClick = (event) => {
         print('gameMessageFail', 'Chili getroffen, Spiel vorbei!')
         startButton.innerHTML = 'Spiel starten'
         CurrentPayout.style.visibility = 'hidden'
-        console.log("1nd minei: " + data.board)
         printFullBoard(data.board)
       }, 1000)
       gambleImage()
@@ -49,7 +51,6 @@ const handleClick = (event) => {
           buttonToggle = !buttonToggle
           failedTimes = 0
           overlay.style.opacity = 0
-          console.log("1nd finishei: " + data.board)
           printFullBoard(data.board)
       }, 1000)
     }
@@ -59,8 +60,12 @@ const handleClick = (event) => {
 const mainButton = () => {
   if(buttonToggle) {
     newGame()
+    minBetButton.disabled = true
+    maxBetButton.disabled = true
   }else {
     cashOut()
+    minBetButton.disabled = false
+    maxBetButton.disabled = false
   }
 }
 
@@ -73,6 +78,22 @@ const gambleImage = () => {
   }
 }
 
+const setMinBet = async() => {
+  betInput.value = minBet
+}
+
+const setMaxBet = async() => {
+  fetch(url + '/getmoney')
+  .then(response => response.json())
+  .then(data => {
+    maxBet = data.currentMoney
+    betInput.value = maxBet
+    if(betInput.value == 0) {
+      print('gameMessageFail', 'Zu wenig Geld!')
+    }
+  })
+}
+
 const newGame = () => {
   if(minecountInput.value == '' || betInput.value == '') {
     print('gameMessageNormal', 'Nicht alle Felder ausgefüllt!')
@@ -83,7 +104,7 @@ const newGame = () => {
       if(data.messageMine == 'noMine' || data.messageBet == 'noBet') {
         print('gameMessageFail', 'Melden Sie sich bitte vorher an!')
       }else if(data.messageBet == -1) {
-        print('gameMessageFail', 'Zu wenig Geld, um ein Spiel zu starten. Mindestbetrag: 1')
+        print('gameMessageFail', 'Zu wenig Geld um ein Spiel zu starten, Mindestbetrag: 1!')
       }else {
         minecountInput.value = data.messageMine
         betInput.value = data.messageBet
@@ -115,6 +136,10 @@ const cashOut = () => {
 const print = (status, message) => {
   gameMessage.classList = status
   gameMessage.innerHTML = message
+  setTimeout(() => {
+    gameMessage.classList = ''
+    gameMessage.innerHTML = ''
+  }, 5000);
 }
 
 const printFullBoard = (board) => {

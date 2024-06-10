@@ -82,6 +82,13 @@
     width: auto;
 }
 
+#minMaxBet {
+    display: flex;
+    margin-top: 1%;
+    margin-right: 18.5%;
+    gap: 1vh;
+}
+
 input {
     background: transparent;
     border: none;
@@ -96,6 +103,12 @@ input {
 
 input:hover {
     border-color: #ffeba7;
+}
+
+#inputtext {
+    color: white;
+    font-size: 16px;
+    margin-top: 2.6%;
 }
 
 .gameMessageNormal {
@@ -142,3 +155,8 @@ input:hover {
     border-radius: 20px;
     font-size: 2vh;
 }
+
+#impressum { 
+    background-color: #38170e;
+    color: #ffeba7;
+  }

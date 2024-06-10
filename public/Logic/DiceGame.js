@@ -1,6 +1,10 @@
 let gameMessage = document.getElementById('gameMessage')
+let playButton = document.getElementById('playButton')
+let betInput = document.getElementById('bet')
 let mode = 'over'
 let rotation = 0
+let maxBet = 0
+const minBet = 1
 
 const toggleMode = () => {
   mode = mode == 'over' ? 'under' : 'over'
@@ -11,6 +15,10 @@ const toggleMode = () => {
 const print = (status, message) => {
   gameMessage.classList = status
   gameMessage.innerHTML = message
+  setTimeout(() => {
+    gameMessage.classList = ''
+    gameMessage.innerHTML = ''
+  }, 5000);
 }
 
 const updateBar = () => {
@@ -19,13 +27,13 @@ const updateBar = () => {
   if(inputRange > 99) {
     inputRange = 99
     print('gameMessageFail', 'Maximale Range 99!')
-    document.getElementById('playButton').disabled = true
+    playButton.disabled = true
   } else if(inputRange < 1) {
     inputRange = 1
     print('gameMessageFail', 'Minimale Range 1!')
-    document.getElementById('playButton').disabled = true
+    playButton.disabled = true
   } else {
-    document.getElementById('playButton').disabled = false
+    playButton.disabled = false
   }
 
   if (mode == 'over') {
@@ -41,6 +49,23 @@ const updateBar = () => {
   }
 }
 
+const setMinBet = () => {
+  betInput.value = minBet
+}
+
+const setMaxBet = async() => {
+  fetch(url + '/getmoney')
+  .then(response => response.json())
+  .then(data => {
+    maxBet = data.currentMoney
+    betInput.value = maxBet
+    if(betInput.value == 0) {
+      print('gameMessageFail', 'Zu wenig Geld!')
+      playButton.disabled = true
+    }
+  })
+}
+
 const playGame = () => {
   const playButton = document.getElementById('playButton')
   let inputRange = document.getElementById('inputRange').value
@@ -50,7 +75,7 @@ const playGame = () => {
   .then(response => response.json())
   .then(data => {
     if (data.bet == 0) {
-      print('gameMessageFail', 'Kein Geld mehr zum Spielen!'); 
+      print('gameMessageFail', 'Zu wenig Geld um ein Spiel zu starten, Mindestbetrag: 1!'); 
       playButton.disabled = true
     }else if(data.message == 'fail' || data.message == 'success') {
       rotation += 360
