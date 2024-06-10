@@ -115,7 +115,7 @@ app.get('/register/:username/:password', (req, res) => {
       }))
     })
   }else {
-    console.log("already")
+    console.log("already: " + IPreq)
     res.send(JSON.stringify({
       message: 'Zu viele Anmeldungen mit dieser IP!'
     }))
