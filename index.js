@@ -551,7 +551,7 @@ const checkMinesCount = (value) => {
 }
 
 const checkBet = (value, userMoney) => {
-  if (value == '') {
+  if (value === '') {
     return 1
   } else {
     let num = parseFloat(value)
