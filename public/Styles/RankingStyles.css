@@ -1,0 +1,7 @@
+#outputRanking {
+    display: flex;
+    justify-content: center;
+    margin: 5vh;
+    font-size: 3vh;
+    color: white;
+}

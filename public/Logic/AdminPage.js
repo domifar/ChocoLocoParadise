@@ -14,9 +14,9 @@ const userButton = () => {
         fetch(url + "/admin/get/" + username)
         .then(response => response.json())
         .then(data => {
-            let outputData
+            let outputData = ''
             if(username == "none") {
-                data.returnData.map(user => outputData += "Username: " + outputData.username + "Money: " + outputData.money + "Last Reward: " + outputData.lastreward + "\n")
+                data.returnData.map(user => outputData += JSON.stringify(user) + "<br>")
             }
             document.getElementById("outputUsers").innerHTML = outputData
             getUserData()

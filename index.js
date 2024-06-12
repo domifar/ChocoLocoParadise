@@ -468,6 +468,27 @@ app.get("/checkIfAdmin", (req, res) => {
   }))
 })
 
+app.get("/ranking", (req, res) => {
+  fs.readFile('./public/Database/Users.txt', 'utf-8', (err, data) => {
+    if(err) throw err
+    data = JSON.parse(data)
+    const keysToCopy = ['username', 'money']
+    let filteredArray = []
+    data.forEach(item => {
+      let filteredItem = {}
+      keysToCopy.forEach(key => {
+        if (item.hasOwnProperty(key)) {
+          filteredItem[key] = item[key]
+        }
+      });
+      filteredArray.push(filteredItem)
+    })
+    res.send(JSON.stringify({
+      list: filteredArray.sort((a, b) => b.money - a.money).filter(user => user.username != "admin")
+    }))
+  })
+})
+
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, '/public/Sites/NoSite.html'))
 })
