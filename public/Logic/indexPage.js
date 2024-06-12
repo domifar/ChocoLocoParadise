@@ -1,5 +1,5 @@
-const url = 'https://chocolocoparadise.onrender.com'
-// const url = 'http://localhost:3000'
+// const url = 'https://chocolocoparadise.onrender.com'
+const url = 'http://localhost:3000'
 
 fetch(url + '/user')
   .then(response => response.json())
