@@ -59,7 +59,7 @@ const setMaxBet = async() => {
   .then(data => {
     maxBet = data.currentMoney
     betInput.value = maxBet
-    if(betInput.value >= 0) {
+    if(betInput.value <= 0) {
       print('gameMessageFail', 'Zu wenig Geld!')
       playButton.disabled = true
     }
