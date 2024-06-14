@@ -51,13 +51,9 @@ const clearIPList = schedule.scheduleJob('10 * * * *', () => {
   console.log('Cleared IP list');
 })
 
-app.use((req, res, next) => {
-  if (req.path === '/Database/Users.txt') {
-    res.status(403).send('Schod eigentlich');
-  } else {
-    next();
-  }
-});
+app.use("/Database/Users.txt", (req, res) => {
+  res.status(403).send('Schod eigentlich')
+})
 
 app.get('/login/:username/:password', (req, res) => {
   let returnMessage

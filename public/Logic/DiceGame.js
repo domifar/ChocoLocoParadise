@@ -59,7 +59,7 @@ const setMaxBet = async() => {
   .then(data => {
     maxBet = data.currentMoney
     betInput.value = maxBet
-    if(betInput.value == 0) {
+    if(betInput.value >= 0) {
       print('gameMessageFail', 'Zu wenig Geld!')
       playButton.disabled = true
     }
@@ -91,11 +91,11 @@ const playGame = () => {
         } else {
           print('gameMessageFail', data.wonmoney.toFixed(2) + '<img style="width:2.2vh; height:2.2vh;" src="../assets/Coin.png" alt="Coin">')
         }
-        getUserData()
       }, 500)
     }else {
       print('gameMessageFail', 'Niemand eingeloggt!')
     }
+    getUserData()
   })
 }
 
