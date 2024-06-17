@@ -77,6 +77,11 @@
   background-size: cover;
 }
 
+#betCard {
+  background-image: url('../assets/Bet.jpeg');
+  background-size: contain;
+}
+
 .impressum {
   background-color: #38170e;
 }
