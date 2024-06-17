@@ -5,6 +5,12 @@
     align-items: center;
 }
 
+.section {
+    display: flex;
+    align-items: center;
+    margin: 0.1vh;
+}
+
 h2 {
     display: flex;
     justify-content: center;
@@ -51,8 +57,9 @@ h2 {
 }
 
 .textinputs {
-    width: 25vh;
-    margin: 0 2vh 0 2vh;
+    text-align: center;
+    width: 7vh;
+    margin: 0 0.1vh 0 0.1vh;
     background: transparent;
     border: none;
     outline: none;
@@ -71,6 +78,7 @@ label {
     color: white;
 }
 
-#description {
+.description {
     color: white;
+    margin-right: 0.5vh;
 }

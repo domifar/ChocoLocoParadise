@@ -30,6 +30,10 @@
                         <i class="giftIcon uil uil-gift"></i>
                         Belohnungen
                     </a>
+                    <a href="./Ranking.html" class="rewardsFirst">
+                        <i class="uil uil-trophy"></i>
+                        Ranking
+                    </a>
                 </div>
                 <a class="smallLogoFirst" href="../index.html"><img src="../assets/LogoSmall.png" alt="Logo" style="height: 80%;"></a>
                 <a href="./Games.html" class="gamesFirst">
@@ -40,7 +44,8 @@
                     <i class="giftIcon uil uil-gift"></i>
                     Belohnungen
                 </a>
-                <a href="./Sites/Ranking.html" class="rewards">
+                <a href="./Ranking.html" class="rewardsFirst">
+                    <i class="uil uil-trophy"></i>
                     Ranking
                 </a>
             </div>
@@ -56,40 +61,49 @@
     <h1>Wetten für VolleyLoreBall</h1>
     <div id="container">
         <h2>Ihre Wetten</h2>
+        <div class="description"></div>
         <div id="wrapper">
             <div class="section">
-                <div class="description">Spiel 1</div>
-                <input class="textinputs" type="text" placeholder="Punkte Team A">
-                <input class="textinputs" type="text" placeholder="Punkte Team B">
+                <div class="description">Spiel 1:</div>
+                <input class="textinputs" type="number" min="0" placeholder="Team A">
+                <input class="textinputs" type="number" min="0" placeholder="Team B">
+                <input class="textinputs" type="text" min="0" placeholder="Gewinner">
             </div>
             <div class="section">
-                <div class="description">Spiel 1</div>
-                <input class="textinputs" type="text" placeholder="Punkte Team A">
-                <input class="textinputs" type="text" placeholder="Punkte Team B">
+                <div class="description">Spiel 2:</div>
+                <input class="textinputs" type="number" min="0" placeholder="Team A">
+                <input class="textinputs" type="number" min="0" placeholder="Team B">
+                <input class="textinputs" type="text" min="0" placeholder="Gewinner">
             </div>
             <div class="section">
-                <div class="description">Spiel 1</div>
-                <input class="textinputs" type="text" placeholder="Punkte Team A">
-                <input class="textinputs" type="text" placeholder="Punkte Team B">
+                <div class="description">Spiel 3:</div>
+                <input class="textinputs" type="number" min="0" placeholder="Team A">
+                <input class="textinputs" type="number" min="0" placeholder="Team B">
+                <input class="textinputs" type="text" min="0" placeholder="Gewinner">
             </div>
             <div class="section">
-                <div class="description">Spiel 1</div>
-                <input class="textinputs" type="text" placeholder="Punkte Team A">
-                <input class="textinputs" type="text" placeholder="Punkte Team B">
+                <div class="description">Spiel 4:</div>
+                <input class="textinputs" type="number" min="0" placeholder="Team A">
+                <input class="textinputs" type="number" min="0" placeholder="Team B">
+                <input class="textinputs" type="text" min="0" placeholder="Gewinner">
             </div>
             <div class="section">
-                <div class="description">Spiel 1</div>
-                <input class="textinputs" type="text" placeholder="Punkte Team A">
-                <input class="textinputs" type="text" placeholder="Punkte Team B">
+                <div class="description">Spiel 5:</div>
+                <input class="textinputs" type="number" min="0" placeholder="Team A">
+                <input class="textinputs" type="number" min="0" placeholder="Team B">
+                <input class="textinputs" type="text" min="0" placeholder="Gewinner">
             </div>
             <div class="section">
-                <div class="description">Spiel 1</div>
-                <input class="textinputs" type="text" placeholder="Punkte Team A">
-                <input class="textinputs" type="text" placeholder="Punkte Team B">
+                <div class="description">Spiel 6:</div>
+                <input class="textinputs" type="number" min="0" placeholder="Team A">
+                <input class="textinputs" type="number" min="0" placeholder="Team B">
+                <input class="textinputs" type="text" min="0" placeholder="Gewinner">
             </div>
+            <button class="sendButton">Absenden</button>
         </div>
     </div>
     <footer><a class="impressum" href="./Impressum.html">Impressum</a></footer>
     <script src="../Defaults/Default.js"></script>
+    <script src="../Logic/Bet.js"></script>
 </body>
 </html>
