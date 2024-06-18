@@ -581,8 +581,8 @@ const checkDiceRange = (range) => {
         num = parseInt(num)
         if(num > 99) {
           return 99
-        }else if(num < 1) {
-          return 1
+        }else if(num < 2) {
+          return 2
         }
         return num
     } else {

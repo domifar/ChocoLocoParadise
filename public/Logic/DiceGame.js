@@ -28,9 +28,9 @@ const updateBar = () => {
     inputRange = 99
     print('gameMessageFail', 'Maximale Range 99!')
     playButton.disabled = true
-  } else if(inputRange < 1) {
-    inputRange = 1
-    print('gameMessageFail', 'Minimale Range 1!')
+  } else if(inputRange < 2) {
+    inputRange = 2
+    print('gameMessageFail', 'Minimale Range 2!')
     playButton.disabled = true
   } else {
     playButton.disabled = false
