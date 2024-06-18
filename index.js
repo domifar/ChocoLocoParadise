@@ -493,6 +493,40 @@ app.get("/ranking", (req, res) => {
   })
 })
 
+app.post('/bet', (req, res) => {
+  const bets = req.body.chosenTeams
+  if(req.session.username) {
+    fs.readFile('./public/Database/Bets.txt', 'utf8', function(err, data){
+      if (err) throw (err)
+      data = JSON.parse(data)
+      if(!data.find(user => user.username == req.session.username)) {
+        const prepJSON = {
+          username: req.session.username,
+          bets: bets
+        }
+        data.push(prepJSON)
+        fs.writeFile('./public/Database/Bets.txt', JSON.stringify(data), 'utf8', function(err){
+          if (err) throw (err)
+        })
+        res.send(JSON.stringify({
+          message: "Wetten erfolgreich eingereicht!",
+          statusBet: "success"
+        }))
+      }else {
+        res.send(JSON.stringify({
+          message: "Sie haben Ihre Wette schon eingereicht!",
+          statusBet: "fail"
+        }))
+      }
+    })
+  }else {
+    res.send(JSON.stringify({
+      message: "Bitte zuerst Anmelden",
+      statusBet: "fail"
+    }))
+  }
+})
+
 app.use((req, res) => {
   res.sendFile(path.join(__dirname, '/public/Sites/NoSite.html'))
 })

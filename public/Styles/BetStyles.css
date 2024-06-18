@@ -6,7 +6,9 @@
 }
 
 .section {
-    
+    display: flex;
+    align-items: center;
+    margin: 0.2vh;
 }
 
 h2 {
@@ -86,6 +88,17 @@ label {
     gap: 2vh;
 }
 
-.inputsbox {
-    margin-left: 5vh;
+#firstDescription {
+    display: flex;
+    align-items: center;
+}
+
+.success {
+    margin: 1vh;
+    color: greenyellow;
+}
+
+.fail {
+    margin: 1vh;
+    color: red;
 }
