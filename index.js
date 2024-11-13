@@ -45,11 +45,11 @@ app.use(session({
   cookie: { secure: false }
 }))
 
-const clearIPList = schedule.scheduleJob('10 * * * *', () => {
-  console.log(registerIPList)
-  registerIPList = []
-  console.log('Cleared IP list');
-})
+// const clearIPList = schedule.scheduleJob('10 * * * *', () => {
+//   console.log(registerIPList)
+//   registerIPList = []
+//   console.log('Cleared IP list');
+// })
 
 app.use("/Database/Users.txt", (req, res) => {
   res.status(403).send('Schod eigentlich')
@@ -85,10 +85,10 @@ app.get('/login/:username/:password', (req, res) => {
 
 app.get('/register/:username/:password', (req, res) => {
   let returnMessage
-  const IPreq = req.headers['x-forwarded-for'].split(',')[0]
-  if(!registerIPList.includes(IPreq)) {
-    registerIPList.push(IPreq)
-    console.log("new: " + IPreq)
+  // const IPreq = req.headers['x-forwarded-for'].split(',')[0]
+  if(true) { //!registerIPList.includes(IPreq)
+    // registerIPList.push(IPreq)
+    // console.log("new: " + IPreq)
     const username = req.params.username
     const password = req.params.password
 
