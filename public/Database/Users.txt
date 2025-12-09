@@ -1,1 +1,1 @@
-[{"username":"admin","password":"niggadrift58","money":"0.00","lastreward":"2024-6-12"},{"username":"domi","password":"balls","money":"0.00","lastreward":"2024-11-13"}]
+[{"username":"admin","password":"admin123","money":"0.00","lastreward":"2024-6-12"},{"username":"domi","password":"servus","money":"0.00","lastreward":"2024-11-13"}]
